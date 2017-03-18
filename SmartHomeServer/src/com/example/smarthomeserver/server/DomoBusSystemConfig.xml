@@ -1,0 +1,206 @@
+
+<!-- DomoBus System Specification Language -->
+
+<!-- v1.5c  29/02/2016 -->
+
+
+<DomoBusSystem ID="#" Name="x" Type="#.#" Version="#.#" Date="x">
+
+ <!-- Notes:
+  "Type" may be used to distinguish between different approaches with
+ different capabilities. For example, if the specification includes icons
+ for the device types, if it includes "Favorites", if details a graphical
+ user interface, etc.
+  "Version" and "Date" refer to the specification version of an actual
+ system and corresponding date. If one adds devices to the system or does
+ other changes, a new version and date should be used.
+  -->
+
+
+<!-- Global definitions of a DomoBus system ----------------------------- -->
+
+
+<!-- Device Classes -->
+  <!-- May be used to organize devices types accordingly with their function -->
+
+<DeviceClassList>
+	<DeviceClass ID="#" Name="x" />
+</DeviceClassList>
+
+
+
+<!-- Value conversion -->
+
+<ConversionFormulaList>
+	<ConversionFormula ID="#" Name="x" UserToSystem="x" SystemToUser="x" DecimalPlaces="#" />
+</ConversionFormulaList>
+
+<ConversionObjectList>
+	<ConversionObject ID="#" Name="x" UserToSystemObj="#" SystemToUserObj="#" DecimalPlaces="#" />
+</ConversionObjectList>
+
+
+
+
+
+<!-- Property Types -->
+##
+<PropertyTypesList>
+<PropertyEnum>
+</PropertyTypesList>
+
+
+
+
+
+<!-- Value Types -->
+
+<ScalarValueTypeList>			<!-- NumBits: 8 or 16 -->
+	<ScalarValueType ID="#" Name="x" NumBits="#" Units="x" MinValue="#" MaxValue="#" Step="#">
+		<ValueConversion Type="x" Ref="#" />
+			<!-- Type: "FORMULA" or "OBJECT" -->
+	</ScalarValueType>
+</ScalarValueTypeList>
+
+<EnumValueTypeList>
+	<EnumValueType ID="#" Name="x">
+		<Enumerated Name="x" Value="#" />
+		<Enumerated Name="x" Value="#" />
+	</EnumValueType>
+</EnumValueTypeList>
+
+<ArrayValueTypeList>
+	<ArrayValueType ID="#" Name="x" MaxLen="x">
+		<ValueConversion Type="OBJECT" Ref="#" />
+	</ArrayValueType>
+</ArrayValueTypeList>
+
+
+
+<!-- Device Types -->
+
+<DeviceTypeList>
+	<DeviceType ID="#" Name="x" RefDeviceClass="#" Description="x">
+		<PropertyList>
+			<Property ID="#" Name="x" AccessMode="x" ValueType="x" RefValueType="#" />
+						<!-- ValueType: "SCALAR", "ENUM" or "ARRAY" -->
+		</PropertyList>
+	</DeviceType>
+</DeviceTypeList>
+
+
+
+
+<!-- Specification of an actual DomoBus system ------------------------- -->
+
+
+
+<!-- Access levels -->
+
+<AccessLevelList>
+	<AccessLevel Level="#" Name="x" />
+</AccessLevelList>
+
+
+
+<!-- Users -->
+
+<UserList>
+	<User ID="#" Name="x" Password="x" AccessLevel="#" />
+</UserList>
+
+
+
+<!-- House or building structure -->
+
+<House ID="#" Name="x" Address="x" Phone="x">
+	<FloorList>
+		<Floor ID="#" Name="x" HeightOrder="#"/>
+	</FloorList>
+	<DivisionList>
+		<Division ID="#" Name="x" RefFloor="#" AccessLevel="#" />
+	</DivisionList>
+</House>
+
+
+  <!-- Previously was:
+  	(ATT: Division ids are global to a given house or building)
+
+  <House ID="#" Name="x" Address="x" Phone="x">
+	<FloorList>
+		<Floor ID="#" Name="x" HeightOrder="#">
+			<DivisionList>
+				<Division ID="#" Name="x" AccessLevel="#" />
+			</DivisionList>
+		</Floor>
+	</FloorList>
+  </House>
+  -->
+
+
+
+<!-- Services -->
+
+<ServiceList>
+	<Service ID="#" Name="x" />
+</ServiceList>
+
+
+
+<!-- Devices -->
+
+<DeviceList>
+	<Device ID="#" RefDeviceType="#" Name="x" Address="#" RefDivision="#" AccessLevel="#,#" UserBlocked="#,#">
+		<DeviceServiceList>
+			<DeviceService RefService="#" />
+		</DeviceServiceList>
+	</Device>
+</DeviceList>
+
+
+
+
+
+<!-- OPTIONAL --------------------------------------------- -->
+
+
+<!-- Scenarios -->   <!-- ATT: Previsously was known as "Macros" -->
+
+<ScenarioList>
+	<Scenario ID="#" Name="x">
+		<ActionList>
+			<Action ID="#" RefDevice="#" RefProperty="#" Value="x" />
+		</ActionList>
+	</Scenario>
+</ScenarioList>
+
+
+
+<!-- Favorites (devices or divisions used more often) -->
+  <!-- Each user can have his list of Favorites -->
+
+<Favorites>
+	<FavoriteList RefUser="#">
+		<FavoriteDevice ID="#" RefDevice="#" />
+		<FavoriteDivision ID="#" RefDivision="#" />
+	</FavoriteList>
+</Favorites>
+
+
+<!-- System state -->
+<!--  This can be used to store a system state, typically in a
+  simulated environment; in an actual system, current state is retrieved
+  directly from the devices -->
+<!-- the attribute InvalidValue is optional; if not present, it is equivalent to
+  having InvalidValue="FALSE". If InvalidValue="TRUE" this means the property's
+  value is unknown or there is a problem with the device and the property's value
+  should be ignored -->
+
+<DeviceStateList>
+	<DeviceState RefDevice="#" RefProperty="#" Value="x" InvalidValue="#" />
+</DeviceStateList>
+
+
+
+</DomoBusSystem>
+
