@@ -8,7 +8,7 @@ public class HouseControlServer {
 	public static void main(String[] args) {
 
 
-		DomoBusConfigLoader configLoader = new DomoBusConfigLoader("DomoBusSystemConfig.xml");
+		DomoBusConfigLoader configLoader = new DomoBusConfigLoader("DomoBusSystemConfig-1.xml");
 
 
 		// start http server

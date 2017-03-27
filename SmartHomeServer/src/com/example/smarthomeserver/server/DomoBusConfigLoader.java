@@ -13,8 +13,7 @@ import java.io.IOException;
  * Created by isabelcosta on 18/03/2017.
  */
 public class DomoBusConfigLoader {
-
-
+    
     // Structures
 
     public DomoBusConfigLoader(String configFileName){
