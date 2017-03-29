@@ -5,5 +5,5 @@ package com.example.smarthomeserver.domain;
  */
 public class HomeConfigEntity {
 
-    
+
 }
