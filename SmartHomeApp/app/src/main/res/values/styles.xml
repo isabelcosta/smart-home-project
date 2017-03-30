@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Base application theme. -->
+    <style name="CustomButton" parent="@android:style/TextAppearance.Medium">
+        <!-- Customize your theme here. -->
+        <item name="android:layout_width">@dimen/custom_button_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:typeface">monospace</item>
+        <!--<item name="android:textColor">#00FF00</item>-->
+    </style>
+
 </resources>
