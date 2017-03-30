@@ -27,7 +27,7 @@
             android:name=".presentation.ui.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="landscape" />
-        <activity android:name=".presentation.ui.MainActivity"></activity>
+        <activity android:name=".presentation.ui.MainActivity"/>
     </application>
 
 </manifest>
