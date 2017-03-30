@@ -3,5 +3,6 @@ Android application to control Smart Home, that receives data from a Central HTT
 
 - A house configuration, is specificated in a XML file according to DomoBus Specification. (http://www.domobus.net/)
 
-### Dependencies:
-- JSON-java - https://github.com/stleary/JSON-java
+### Libraries:
+- JSON-java - https://github.com/stleary/JSON-java - to parse XML files
+- BottomBar - https://github.com/roughike/BottomBar - to create the bottom navigation bar
