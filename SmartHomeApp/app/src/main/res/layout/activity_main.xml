@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.smarthomeapp.presentation.ui.MainActivity">
 
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="946dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:bb_tabXmlResource="@xml/bottom_bar_tabs"
+        tools:layout_editor_absoluteY="236dp"
+        tools:layout_editor_absoluteX="8dp" />
 </android.support.constraint.ConstraintLayout>

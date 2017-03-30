@@ -34,10 +34,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                Intent mainIntent;
-
-                // TODO: 29/03/2017 create home/divisions activity
-                mainIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                Intent mainIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
 
                 /* Create an Intent that will start the Home Activity. */
                 SplashScreenActivity.this.startActivity(mainIntent);

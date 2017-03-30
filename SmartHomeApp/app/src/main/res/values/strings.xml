@@ -2,6 +2,15 @@
     <string name="app_name">SmartHomeApp</string>
     <string name="title_activity_login">Sign in</string>
 
+    <!-- Bottom Menu Options-->
+    <string name="menu_overview">Overview</string>
+    <string name="menu_divisions">Divisions</string>
+    <string name="menu_events">Events</string>
+    <string name="menu_control">Control</string>
+    <string name="menu_settings">Settings</string>
+
+
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_username">Username</string>

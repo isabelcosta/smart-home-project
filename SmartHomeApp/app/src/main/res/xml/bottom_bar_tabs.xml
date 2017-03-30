@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_overview"
+        icon="@drawable/ic_menu_home"
+        title="@string/menu_overview" />
+    <tab
+        id="@+id/tab_divisions"
+        icon="@drawable/ic_menu_home"
+        title="@string/menu_divisions" />
+    <tab
+        id="@+id/tab_events"
+        icon="@drawable/ic_menu_home"
+        title="@string/menu_events" />
+    <tab
+        id="@+id/tab_control"
+        icon="@drawable/ic_menu_home"
+        title="@string/menu_control" />
+    <tab
+        id="@+id/tab_settings"
+        icon="@drawable/ic_menu_home"
+        title="@string/menu_settings" />
+</tabs>
