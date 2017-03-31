@@ -6,3 +6,4 @@ Android application to control Smart Home, that receives data from a Central HTT
 ### Libraries:
 - JSON-java - https://github.com/stleary/JSON-java - to parse XML files
 - BottomBar - https://github.com/roughike/BottomBar - to create the bottom navigation bar
+- ButterKnife - https://github.com/JakeWharton/butterknife - to bind views easily 
