@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--Specific Colors-->
+    <color name="white">#FFFFFF</color>
+
     <color name="logo_blue_color">#00CEFF</color>
     <color name="selected_menu_option">#FFFFFF</color>
     <color name="unselected_menu_option">#c0c7d3</color>

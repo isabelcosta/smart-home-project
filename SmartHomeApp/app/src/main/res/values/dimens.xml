@@ -1,8 +1,17 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="custom_button_width">500dp</dimen>
+
+    <!-- Bottom Menu Navigation -->
+
+    <dimen name="menu_icon_size">35dp</dimen>
+    <dimen name="menu_option_margin">10dp</dimen>
+    <dimen name="menu_space_between_icon_title">5dp</dimen>
+
+
+
 
 </resources>

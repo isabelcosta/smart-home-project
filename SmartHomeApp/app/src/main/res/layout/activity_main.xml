@@ -6,27 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.example.smarthomeapp.presentation.ui.MainActivity">
 
-    <!--<fragment android:name="com.example.smarthomeapp.presentation.ui.BaseFragment->
-        <!-android:id="@+id/headlines_fragment"-->
-        <!--android:layout_above="@+id/bottom_navigation_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"/>-->
-
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_above="@+id/bottom_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottom_navigation_bar"
+
+    <!-- Bottom Menu Navigation -->
+
+    <include
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigation_bar"
         android:layout_alignParentBottom="true"
-        app:bb_behavior="underNavbar"
-        app:bb_activeTabColor="@color/logo_blue_color"
-        app:bb_inActiveTabColor="@color/unselected_menu_option"
-        app:bb_tabXmlResource="@xml/bottom_bar_tabs"
-        app:bb_titleTextAppearance="@style/BottomMenuTextSize"
-        app:bb_showShadow="true"/>
+        layout="@layout/bottom_manual_menu" />
+
 </RelativeLayout>

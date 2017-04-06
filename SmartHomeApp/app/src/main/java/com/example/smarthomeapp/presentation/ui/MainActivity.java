@@ -1,26 +1,44 @@
 package com.example.smarthomeapp.presentation.ui;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.net.Uri;
-import android.support.annotation.IdRes;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
-import android.text.Layout;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.smarthomeapp.R;
 import com.example.smarthomeapp.util.ActivityUtils;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity implements BaseFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.bottom_navigation_bar)
-    BottomBar bottomBarView;
+    LinearLayout bottomNavigationView;
+
+    @BindView(R.id.action_overview)
+    LinearLayout overviewMenuOptionView;
+
+    @BindView(R.id.action_divisions)
+    LinearLayout divisionsMenuOptionView;
+
+    @BindView(R.id.action_events)
+    LinearLayout eventsMenuOptionView;
+
+    @BindView(R.id.action_control)
+    LinearLayout controlMenuOptionView;
+
+    @BindView(R.id.action_settings)
+    LinearLayout settingsMenuOptionView;
 
     @BindView(R.id.content_frame)
     View fragmentContainer;
@@ -42,29 +60,40 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
     protected int getContentViewId(){
         return R.layout.activity_main;
     }
-    public void setListeners(){
-        bottomBarView.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
 
-                switch(tabId) {
-                    case R.id.tab_overview:
-                        replaceFragment(DivisionsFragment.newInstance(), R.string.menu_overview);
-                        break;
-                    case R.id.tab_divisions:
-                        Toast.makeText(MainActivity.this, "Hey How", Toast.LENGTH_LONG).show();
-                        replaceFragment(DivisionsFragment.newInstance(), R.string.menu_divisions);
-                        break;
-                    case R.id.tab_events:
-                        replaceFragment(DivisionsFragment.newInstance(), R.string.menu_events);
-                        break;
-                    case R.id.tab_control:
-                        replaceFragment(DivisionsFragment.newInstance(), R.string.menu_control);
-                        break;
-                    case R.id.tab_settings:
-                        replaceFragment(DivisionsFragment.newInstance(), R.string.menu_settings);
-                        break;
-                }
+    public void setListeners(){
+
+        overviewMenuOptionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_overview);
+            }
+        });
+
+        divisionsMenuOptionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Hey How", Toast.LENGTH_LONG).show();
+                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_divisions);
+            }
+        });
+        eventsMenuOptionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_events);
+            }
+        });
+        controlMenuOptionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_control);
+            }
+        });
+
+        settingsMenuOptionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_settings);
             }
         });
     }
