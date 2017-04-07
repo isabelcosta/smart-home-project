@@ -14,10 +14,17 @@ import java.io.IOException;
  */
 public class DomoBusConfigLoader {
 
+    private static DomoBusConfigLoader ourInstance = new DomoBusConfigLoader();
+
+    public static DomoBusConfigLoader getInstance() {
+        return ourInstance;
+    }
+
+    public DomoBusConfigLoader(){}
+
     // Structures
 
     public DomoBusConfigLoader(String configFileName){
-
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating(true);
