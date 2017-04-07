@@ -6,4 +6,5 @@
 .DS_Store
 /SmartHomeServer/build
 /SmartHomeServer/out
+/Utils/.idea
 /captures
