@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="@dimen/division_item_icon_size"
+        android:layout_height="@dimen/division_item_icon_size"
+        android:id="@+id/division_image"
+        tools:src="@drawable/ic_android_black_24dp"
+        android:layout_marginBottom="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/division_text"
+        tools:text="Bedroom"
+        android:textAlignment="center"
+        android:textSize="@dimen/division_item_text_size"/>
+</LinearLayout>

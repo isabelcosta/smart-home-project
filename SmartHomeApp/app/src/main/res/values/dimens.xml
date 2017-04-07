@@ -7,11 +7,14 @@
 
     <!-- Bottom Menu Navigation -->
 
-    <dimen name="menu_icon_size">35dp</dimen>
+    <dimen name="menu_icon_size">50dp</dimen>
     <dimen name="menu_option_margin">10dp</dimen>
     <dimen name="menu_space_between_icon_title">5dp</dimen>
 
+    <!-- GridView Items -->
 
-
+    <dimen name="division_item_icon_size">150dp</dimen>
+    <dimen name="division_item_text_size">24sp</dimen>
+    <dimen name="division_grid_margin">20dp</dimen>
 
 </resources>

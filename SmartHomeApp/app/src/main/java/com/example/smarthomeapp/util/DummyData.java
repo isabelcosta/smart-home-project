@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class DummyData {
 
     public static String[] divisionsNames = new String[]{
-            "Bedroom1", "Kitchen", "Bedroom2", "Living Room", "Bathroom", "Outdoor"
+            "Bedroom1", "Kitchen", "Bedroom2", "Living Room", "Bathroom", "Outdoor", "Living Room",
+            "Bathroom", "Outdoor", "Living Room", "Bathroom", "Outdoor", "Living Room", "Bathroom",
+            "Outdoor", "Living Room", "Bathroom", "Outdoor"
     };
 }

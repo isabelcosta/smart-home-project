@@ -7,8 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.smarthomeapp.R;
+import com.example.smarthomeapp.util.DummyData;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,10 +30,12 @@ import com.example.smarthomeapp.R;
  * create an instance of this fragment.
  */
 public class DivisionsFragment extends BaseFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
+
+    /**
+     * Views
+     */
+    @BindView(R.id.divisions_grid_view)
+    GridView divisionsGridView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -46,17 +59,29 @@ public class DivisionsFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        super.onCreateView(inflater, container, savedInstanceState);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_divisions, container, false);
+        View view = inflater.inflate(R.layout.fragment_divisions, container, false);
+        ButterKnife.bind(this, view);
+
+        List<String> divisionsList = new ArrayList<>(Arrays.asList(DummyData.divisionsNames));
+        divisionsGridView.setAdapter(new DivisionsAdapter(getContext(), divisionsList));
+
+        divisionsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Toast.makeText(getContext(), "Room", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
