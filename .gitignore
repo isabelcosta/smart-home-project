@@ -1,10 +1,10 @@
 *.iml
 .gradle
 /local.properties
-/SmartHomeServer/.idea/workspace.xml
-/SmartHomeServer/.idea/libraries
+/.idea/workspace.xml
+/.idea/libraries
 .DS_Store
-/SmartHomeServer/build
-/SmartHomeServer/out
-/Utils/.idea
+/build
 /captures
+.externalNativeBuild
+local.properties

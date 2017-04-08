@@ -1,1 +1,1 @@
-
+include ':app', ':utils', ':server', 'utils'
