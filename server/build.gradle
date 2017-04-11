@@ -2,7 +2,7 @@ apply plugin: 'java'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':utils')
+    compile project(':commonlib')
 }
 
 sourceCompatibility = "1.7"
