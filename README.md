@@ -6,7 +6,7 @@ Android application to control Smart Home, that receives data from a Central HTT
 ### Modules:
 - **app** - all code related to the android app; dependency on :utils
 - **server** - all code related to the server; dependency on :utils and JSON-java
-- **utils** - contains all common classes like xml parser entities and XML loader
+- **commonlib** - contains all common classes like xml parser entities and XML loader
 
 ### Libraries:
 - JSON-java - https://github.com/stleary/JSON-java - to parse XML files
