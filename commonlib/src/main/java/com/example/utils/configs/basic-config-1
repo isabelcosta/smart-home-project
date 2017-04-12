@@ -1,0 +1,190 @@
+
+<!-- DomoBus System Specification Language -->
+
+<!-- v1.5c  29/02/2016 -->
+
+
+<DomoBusSystem ID="1" Name="Basic Structure" Type="1.2" Version="1.0" Date="27-03-2017">
+
+    <!-- Notes:
+     "Type" may be used to distinguish between different approaches with
+    different capabilities. For example, if the specification includes icons
+    for the device types, if it includes "Favorites", if details a graphical
+    user interface, etc.
+     "Version" and "Date" refer to the specification version of an actual
+    system and corresponding date. If one adds devices to the system or does
+    other changes, a new version and date should be used.
+     -->
+
+
+    <!-- Global definitions of a DomoBus system ###################### -->
+
+
+    <!-- Device Classes -->
+    <!-- May be used to organize devices types accordingly with their function -->
+
+    <DeviceClassList>
+        <DeviceClass ID="1" Name="Lighting" />
+        <DeviceClass ID="2" Name="Heating" />
+        <DeviceClass ID="3" Name="Security" />
+    </DeviceClassList>
+
+    <!-- Value conversion -->
+
+    <ConversionFormulaList>
+        <ConversionFormula ID="1" Name="Doubles the value"
+            UserToSystem="2*x" SystemToUser="x/2" DecimalPlaces="0" />
+        <ConversionFormula ID="2" Name="Times 10 plus 200"
+            UserToSystem="10*x+200" SystemToUser="(x-200)/10" DecimalPlaces="1" />
+        <!-- real value varies between -20.0 and 60.0. Value 23.4 is represented by 434 -->
+    </ConversionFormulaList>
+    <ConversionObjectList>
+        <ConversionObject ID="1" Name="Intensity - lux"
+            UserToSystemObj="1" SystemToUserObj="2" DecimalPlaces="2" />
+    </ConversionObjectList>
+
+    <!-- Property Types -->
+
+    <!--<PropertyTypesList>-->
+    <!--<PropertyEnum>-->
+    <!--</PropertyTypesList>-->
+
+
+    <!-- Value Types -->
+
+    <ScalarValueTypeList>
+        <ScalarValueType ID="1" Name="Percentage (0-100)" NumBits="8"
+            Units="%" MinValue="0" MaxValue="100" Step="1">
+            <!-- no value conversion -->
+        </ScalarValueType>
+        <ScalarValueType ID="2" Name="Power" NumBits="16"
+            Units="Watt" MinValue="0" MaxValue="1000" Step="10">
+            <ValueConversion Type="FORMULA" Ref="2" />
+        </ScalarValueType>
+    </ScalarValueTypeList>
+
+    <EnumValueTypeList>
+        <EnumValueType ID="1" Name="On-Off">
+            <Enumerated Name="Off" Value="0" />
+            <Enumerated Name="On" Value="1" />
+        </EnumValueType>
+        <EnumValueType ID="2" Name="Air Conditioning Commands">
+            <Enumerated Name="Off" Value="0" />
+            <Enumerated Name="Heating" Value="1" />
+            <Enumerated Name="Cooling" Value="2" />
+        </EnumValueType>
+    </EnumValueTypeList>
+
+    <ArrayValueTypeList>
+        <ArrayValueType ID="1" Name="Company name" MaxLen="10">
+            <!-- no value conversion -->
+        </ArrayValueType>
+        <ArrayValueType ID="2" Name="Float IEEE" MaxLen="8">
+            <ValueConversion Type="OBJECT" Ref="1" />
+        </ArrayValueType>
+    </ArrayValueTypeList>
+
+    <!-- Device Types -->
+
+    <!-- ValueType: "SCALAR", "ENUM" or "ARRAY" -->
+
+    <DeviceTypeList>
+        <DeviceType ID="1" Name="Adjustable light" RefDeviceClass="1" Description="-">
+            <PropertyList>
+                <Property ID="1" Name="On-Off" AccessMode="RW"
+                    ValueType="ENUM" RefValueType="1" />
+                <Property ID="2" Name="Intensity" AccessMode="RW"
+                    ValueType="SCALAR" RefValueType="1" />
+            </PropertyList>
+        </DeviceType>
+        <DeviceType ID="2" Name="Temperature Sensor" RefDeviceClass="2" Description="-">
+            <PropertyList>
+                <Property ID="3" Name="Temperature" AccessMode="RO"
+                    ValueType="SCALAR" RefValueType="1" />
+            </PropertyList>
+        </DeviceType>
+    </DeviceTypeList>
+
+
+    <!-- Specification of an actual DomoBus system -->
+
+    <!-- Access levels -->
+
+    <AccessLevelList>
+        <AccessLevel Level="0" Name="Free Access" />
+        <AccessLevel Level="1" Name="Guest" />
+        <AccessLevel Level="2" Name="Common User - Child" />
+        <AccessLevel Level="4" Name="Common User - Parent" />
+        <AccessLevel Level="9" Name="Administrator" />
+    </AccessLevelList>
+
+    <!-- Users -->
+
+    <UserList>
+        <User ID="1" Name="Maria" Password="123" AccessLevel="9" />
+    </UserList>
+
+    <!-- House or building structure -->
+
+    <House ID="1" Name="Villa Silva" Address="Av. das Laranjeiras" Phone="215254632">
+        <FloorList>
+            <Floor ID="2" Name="Ground-floor" HeightOrder="0" />
+        </FloorList>
+        <DivisionList>
+            <Division ID="1" Name="Hall" RefFloor="1" AccessLevel="1" />
+            <Division ID="2" Name="Kitchen" RefFloor="1" AccessLevel="3" />
+            <Division ID="3" Name="Living-room" RefFloor="1" AccessLevel="2" />
+            <Division ID="4" Name="Bathroom" RefFloor="1" AccessLevel="2" />
+        </DivisionList>
+    </House>
+
+    <!-- Services -->
+
+    <ServiceList>
+        <Service ID="1" Name="Heating" />
+        <Service ID="2" Name="Lighting" />
+        <Service ID="3" Name="Security" />
+        <Service ID="4" Name="Appliances" />
+        <Service ID="5" Name="Irrigation" />
+    </ServiceList>
+
+    <!-- Devices -->
+
+    <DeviceList>
+        <Device ID="#" RefDeviceType="#" Name="x" Address="#" RefDivision="#" AccessLevel="#,#" UserBlocked="#,#">
+            <DeviceServiceList>
+                <DeviceService RefService="#" />
+            </DeviceServiceList>
+        </Device>
+    </DeviceList>
+
+    <!-- ################################# OPTIONAL ##################################### -->
+
+
+    <!-- Scenarios -->   <!-- ATT: Previsously was known as "Macros" -->
+
+    <ScenarioList>
+        <Scenario ID="#" Name="x">
+            <ActionList>
+                <Action ID="#" RefDevice="#" RefProperty="#" Value="x" />
+            </ActionList>
+        </Scenario>
+    </ScenarioList>
+
+
+    <!-- System state -->
+    <!--  This can be used to store a system state, typically in a
+      simulated environment; in an actual system, current state is retrieved
+      directly from the devices -->
+    <!-- the attribute InvalidValue is optional; if not present, it is equivalent to
+      having InvalidValue="FALSE". If InvalidValue="TRUE" this means the property's
+      value is unknown or there is a problem with the device and the property's value
+      should be ignored -->
+
+    <DeviceStateList>
+        <DeviceState RefDevice="#" RefProperty="#" Value="x" InvalidValue="#" />
+    </DeviceStateList>
+
+
+
+</DomoBusSystem>
