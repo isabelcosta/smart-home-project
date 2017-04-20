@@ -22,7 +22,7 @@
 
     <!-- Device Classes -->
     <!-- May be used to organize devices types accordingly with their function -->
-
+<!--CAN FORGET-->
     <DeviceClassList>
         <DeviceClass ID="1" Name="Lighting" />
         <DeviceClass ID="2" Name="Heating" />
