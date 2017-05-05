@@ -1,4 +1,4 @@
-package com.example.smarthomeapp.presentation.ui;
+package com.example.smarthomeapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,4 +17,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract int getContentViewId();
+
 }

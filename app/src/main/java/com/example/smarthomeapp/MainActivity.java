@@ -1,21 +1,13 @@
-package com.example.smarthomeapp.presentation.ui;
+package com.example.smarthomeapp;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.smarthomeapp.R;
+import com.example.smarthomeapp.divisions.DivisionsFragment;
 import com.example.smarthomeapp.util.ActivityUtils;
 
 import butterknife.BindView;

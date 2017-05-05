@@ -44,7 +44,7 @@ public class DomoBusConfigLoader {
 
     // Structures
 
-    public DomoBusConfigLoader(String configFileName){
+    public DomoBusConfigLoader(String configFileName) {
 
         try {
 
@@ -78,6 +78,9 @@ public class DomoBusConfigLoader {
         }
     }
 
+    public DomoBusConfigLoader(Document document){
+        createStructures(document);
+    }
     public HomeConfigEntity getHomeConfig(){
         return _homeConfig;
     }
@@ -170,7 +173,7 @@ public class DomoBusConfigLoader {
 
     public static void main(String[] args) {
 
-        DomoBusConfigLoader configLoader = new DomoBusConfigLoader("basic-config-1.xml");
+        DomoBusConfigLoader configLoader = new DomoBusConfigLoader("basic_config_1.xml");
         for (Division d : configLoader.getHomeConfig().getDivisionList()){
             System.out.println(d.getName());
         }

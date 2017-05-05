@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.smarthomeapp.presentation.ui.LoginActivity">
+    tools:context="com.example.smarthomeapp.login.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
@@ -79,16 +79,28 @@
                 style="@style/CustomButton"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:text="@string/action_sign_in" />
 
-            <Button
-                android:id="@+id/load_house_config_button"
-                style="@style/CustomButton"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_load_house_config"
-                android:textStyle="bold" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/load_house_config_button"
+                    style="@style/CustomButton"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/action_load_house_config"
+                    android:layout_centerInParent="true"/>
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/load_xml_loader"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@+id/load_house_config_button"/>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </ScrollView>

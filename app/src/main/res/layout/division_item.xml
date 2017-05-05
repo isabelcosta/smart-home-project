@@ -10,7 +10,7 @@
         android:layout_width="@dimen/division_item_icon_size"
         android:layout_height="@dimen/division_item_icon_size"
         android:id="@+id/division_image"
-        tools:src="@drawable/ic_android_black_24dp"
+        tools:src="@drawable/ic_android"
         android:layout_marginBottom="20dp"/>
     <TextView
         android:layout_width="wrap_content"

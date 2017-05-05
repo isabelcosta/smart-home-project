@@ -1,4 +1,4 @@
-package com.example.smarthomeapp.presentation.ui;
+package com.example.smarthomeapp.divisions;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.smarthomeapp.R;
+import com.example.smarthomeapp.util.IconUtils;
+import com.example.utils.domain.Division;
 
 import java.util.List;
 
@@ -21,22 +23,22 @@ import butterknife.ButterKnife;
 
 public class DivisionsAdapter extends BaseAdapter{
 
-    private List<String> _divisionsList;
-    private Context _context;
+    private List<Division> mDivisionsList;
+    private Context mContext;
 
-    public DivisionsAdapter(Context context, List<String> divisionsList){
-        this._divisionsList = divisionsList;
-        this._context = context;
+    public DivisionsAdapter(Context context, List<Division> divisionsList){
+        this.mDivisionsList = divisionsList;
+        this.mContext = context;
     }
 
     @Override
     public int getCount() {
-        return _divisionsList.size();
+        return mDivisionsList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return _divisionsList.get(position);
+        return mDivisionsList.get(position);
     }
 
     @Override
@@ -53,7 +55,7 @@ public class DivisionsAdapter extends BaseAdapter{
             holder = (DivisionsViewHolder) convertView.getTag();
 
         } else {
-            LayoutInflater inflater = LayoutInflater.from(_context);
+            LayoutInflater inflater = LayoutInflater.from(mContext);
 
             // get layout from division_item.xml
             convertView = inflater.inflate(R.layout.division_item, parent, false);
@@ -61,11 +63,21 @@ public class DivisionsAdapter extends BaseAdapter{
             convertView.setTag(holder);
         }
 
-        holder.divisionText.setText(_divisionsList.get(position));
-        // TODO: 07-Apr-17 create hashMap with icons mapped to divisions
-        holder.divisionImage.setImageResource(R.drawable.ic_bed);
+        Division division = mDivisionsList.get(position);
+
+        holder.divisionText.setText(division.getName());
+        holder.divisionImage.setImageResource(IconUtils.getIconsMap().get(division.getRefDivisionType()));
 
         return convertView;
+    }
+
+    public void replaceData(List<Division> divisions) {
+        setList(divisions);
+        notifyDataSetChanged();
+    }
+
+    private void setList(List<Division> divisions) {
+        mDivisionsList = divisions;
     }
 
     public class DivisionsViewHolder {

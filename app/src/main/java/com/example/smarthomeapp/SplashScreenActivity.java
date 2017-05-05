@@ -1,4 +1,4 @@
-package com.example.smarthomeapp.presentation.ui;
+package com.example.smarthomeapp;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.smarthomeapp.R;
+import com.example.smarthomeapp.login.LoginActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
