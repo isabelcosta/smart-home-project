@@ -8,24 +8,24 @@ public class Floor {
     /**
      * Attributes
      */
-    private int id;
+    private String id;
     private String name;
-    private int heightOrder;
+    private String heightOrder;
 
     /**
      * Constructor
      */
-    public Floor(int id, String name, int heightOrder) {
+    public Floor(String id, String name, String heightOrder) {
         this.id = id;
         this.name = name;
         this.heightOrder = heightOrder;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -37,11 +37,11 @@ public class Floor {
         this.name = name;
     }
 
-    public int getHeightOrder() {
+    public String getHeightOrder() {
         return heightOrder;
     }
 
-    public void setHeightOrder(int heightOrder) {
+    public void setHeightOrder(String heightOrder) {
         this.heightOrder = heightOrder;
     }
 }

@@ -128,13 +128,13 @@
 
     <House ID="1" Name="Villa Silva" Address="Av. das Laranjeiras" Phone="215254632">
         <FloorList>
-            <Floor ID="2" Name="Ground-floor" HeightOrder="0" />
+            <Floor ID="1" Name="Ground-floor" HeightOrder="0" />
         </FloorList>
         <DivisionList>
-            <Division ID="1" Name="Hall" RefFloor="1" AccessLevel="1" />
-            <Division ID="2" Name="Kitchen" RefFloor="1" AccessLevel="3" />
-            <Division ID="3" Name="Living-room" RefFloor="1" AccessLevel="2" />
-            <Division ID="4" Name="Bathroom" RefFloor="1" AccessLevel="2" />
+            <Division ID="1" Name="Bedroom" RefFloor="1" AccessLevel="1" RefDivisionType="1" />
+            <Division ID="2" Name="Kitchen" RefFloor="1" AccessLevel="3" RefDivisionType="2" />
+            <Division ID="3" Name="Living-room" RefFloor="1" AccessLevel="2" RefDivisionType="6" />
+            <Division ID="4" Name="Bathroom" RefFloor="1" AccessLevel="2" RefDivisionType="3" />
         </DivisionList>
     </House>
 
@@ -157,6 +157,23 @@
             </DeviceServiceList>
         </Device>
     </DeviceList>
+
+
+
+    <!-- ################################# ADDITIONAL ##################################### -->
+
+    <!-- Disivion Type -->
+
+    <DivisionTypeList>
+        <DivisionType ID="1" Name="Bedroom" />
+        <DivisionType ID="2" Name="Kitchen" />
+        <DivisionType ID="3" Name="Bathroom" />
+        <DivisionType ID="4" Name="Hall" />
+        <DivisionType ID="5" Name="Attic" />
+        <DivisionType ID="6" Name="Living-room" />
+        <DivisionType ID="7" Name="Garden" />
+    </DivisionTypeList>
+
 
     <!-- ################################# OPTIONAL ##################################### -->
 

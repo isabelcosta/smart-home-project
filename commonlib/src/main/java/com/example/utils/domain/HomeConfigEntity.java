@@ -13,6 +13,9 @@ public class HomeConfigEntity {
     private List<Device> _deviceList;
     private List<Service> _serviceList;
     private House _house;
+    private List<Floor> _floorList;
+    private List<Division> _divisionList;
+    private List<DivisionType> _divisionTypeList;
 
     public static HomeConfigEntity getInstance(){
         if (_instance == null){
@@ -34,6 +37,22 @@ public class HomeConfigEntity {
     }
 
     public List<Floor> getFloorList() {
-        return getHouse().getFloorList();
+        return _floorList;
+    }
+
+    public void setFloorList(List<Floor> floorList){
+        _floorList = floorList;
+    }
+
+    public List<Division> getDivisionList(){
+        return _divisionList;
+    }
+
+    public void setDivisionList(List<Division> divisionList){
+        _divisionList = divisionList;
+    }
+
+    public void setDivisionTypeList(List<DivisionType> _divisionTypeList){
+        _divisionTypeList = _divisionTypeList;
     }
 }

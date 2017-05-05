@@ -8,26 +8,28 @@ public class Division {
     /**
      * Attributes
      */
-    private int id;
+    private String id;
     private String name;
-    private int refFloor;
-    private int accessLevel;
+    private String refFloor;
+    private String accessLevel;
+    private String refDivisionType;
 
     /**
      * Constructor
      */
-    public Division(int id, String name, int refFloor, int accessLevel) {
+    public Division(String id, String name, String refFloor, String accessLevel, String refDivisionType) {
         this.id = id;
         this.name = name;
         this.refFloor = refFloor;
         this.accessLevel = accessLevel;
+        this.refDivisionType = refDivisionType;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,19 +41,28 @@ public class Division {
         this.name = name;
     }
 
-    public int getRefFloor() {
+    public String getRefFloor() {
         return refFloor;
     }
 
-    public void setRefFloor(int refFloor) {
+    public void setRefFloor(String refFloor) {
         this.refFloor = refFloor;
     }
 
-    public int getAccessLevel() {
+    public String getAccessLevel() {
         return accessLevel;
     }
 
-    public void setAccessLevel(int accessLevel) {
+    public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
     }
+
+    public String getRefDivisionType() {
+        return refDivisionType;
+    }
+
+    public void setRefDivisionType(String refDivisionType) {
+        this.refDivisionType = refDivisionType;
+    }
+
 }

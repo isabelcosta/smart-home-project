@@ -35,6 +35,8 @@ public class HouseConfigConstants {
 
     public static final String DIVSION = "Division";
     public static final String DIVSION_LIST = "DivisionList";
+    public static final String DIVSION_TYPE_LIST = "DivisionTypeList";
+    public static final String DIVSION_TYPE = "DivisionType";
 
     public static final String FLOOR = "Floor";
     public static final String FLOOR_LIST = "FloorList";
@@ -63,6 +65,7 @@ public class HouseConfigConstants {
 
     public static final String REF_DEVICE = "RefDevice";
     public static final String REF_DIVISION = "RefDivision";
+    public static final String REF_DIVISION_TYPE = "RefDivisionType";
     public static final String REF_USER = "RefUser";
     public static final String REF_PROPERTY = "RefProperty";
 
