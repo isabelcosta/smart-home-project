@@ -16,6 +16,7 @@ public class HomeConfigEntity {
     private List<Floor> _floorList;
     private List<Division> _divisionList;
     private List<DivisionType> _divisionTypeList;
+    private List<User> _userList;
 
     public static HomeConfigEntity getInstance(){
         if (_instance == null){
@@ -55,4 +56,13 @@ public class HomeConfigEntity {
     public void setDivisionTypeList(List<DivisionType> _divisionTypeList){
         _divisionTypeList = _divisionTypeList;
     }
+
+    public List<User> getUserList() {
+        return _userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this._userList = userList;
+    }
+
 }

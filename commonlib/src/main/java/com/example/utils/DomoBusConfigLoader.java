@@ -9,6 +9,7 @@ import com.example.utils.domain.Division;
 import com.example.utils.domain.DivisionType;
 import com.example.utils.domain.Floor;
 import com.example.utils.domain.HomeConfigEntity;
+import com.example.utils.domain.User;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -29,8 +30,11 @@ import static com.example.utils.HouseConfigConstants.HEIGHT_ORDER;
 import static com.example.utils.HouseConfigConstants.HOUSE;
 import static com.example.utils.HouseConfigConstants.ID;
 import static com.example.utils.HouseConfigConstants.NAME;
+import static com.example.utils.HouseConfigConstants.PASSWORD;
 import static com.example.utils.HouseConfigConstants.REF_DIVISION_TYPE;
 import static com.example.utils.HouseConfigConstants.REF_FLOOR;
+import static com.example.utils.HouseConfigConstants.USER;
+import static com.example.utils.HouseConfigConstants.USER_LIST;
 
 /**
  * Created by isabelcosta on 18/03/2017.
@@ -106,6 +110,7 @@ public class DomoBusConfigLoader {
         parseFloors(classElement);
         parseDivisions(classElement);
         parseDivisionsType(classElement);
+        parseUsersList(classElement);
     }
 
     /**
@@ -165,6 +170,26 @@ public class DomoBusConfigLoader {
         }
 
         _homeConfig.setDivisionTypeList(divisionTypeList);
+    }
+
+    private void parseUsersList(Element classElement){
+        // Get Divisions Type List
+
+        List<Node> userListXML = classElement.selectNodes(USER_LIST + "/" + USER);
+        List<User> userList = new ArrayList<>();
+
+        for (Node node : userListXML) {
+            User d = new User(
+                    node.valueOf(getAttribute(ID)),
+                    node.valueOf(getAttribute(NAME)),
+                    node.valueOf(getAttribute(PASSWORD)),
+                    node.valueOf(getAttribute(ACCESS_LEVEL))
+
+            );
+            userList.add(d);
+        }
+
+        _homeConfig.setUserList(userList);
     }
 
     private String getAttribute(String attr){

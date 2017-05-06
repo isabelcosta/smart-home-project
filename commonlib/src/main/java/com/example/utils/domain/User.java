@@ -8,26 +8,26 @@ public class User {
     /**
      * Attributes
      */
-    private int id;
+    private String id;
     private String name;
     private String password;
-    private int accessLevel;
+    private String accessLevel;
 
     /**
      * Constructor
      */
-    public User(int id, String name, String password, int accessLevel) {
+    public User(String id, String name, String password, String accessLevel) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.accessLevel = accessLevel;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,11 +47,11 @@ public class User {
         this.password = password;
     }
 
-    public int getAccessLevel() {
+    public String getAccessLevel() {
         return accessLevel;
     }
 
-    public void setAccessLevel(int accessLevel) {
+    public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
     }
 }

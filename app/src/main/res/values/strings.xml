@@ -10,7 +10,7 @@
     <string name="menu_settings">Settings</string>
 
 
-    <!-- Strings related to login -->
+    <!-- Login Screen -->
     <string name="prompt_email">Email</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
@@ -24,6 +24,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="remember_me">Remember me</string>
 
     <!-- Strings related to contentDescriptions of images -->
     <string name="logo_content_description">Logo Image</string>
@@ -33,5 +34,8 @@
 
     <string name="no_divisions_all">This house has no divisions!!!</string>
 
+
+    <!-- Settings Screen -->
+    <string name="log_out">Log out</string>
 
 </resources>
