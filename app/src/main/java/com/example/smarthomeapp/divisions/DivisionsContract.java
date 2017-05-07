@@ -32,7 +32,7 @@ public interface DivisionsContract {
 
         void result(int requestCode, int resultCode);
 
-        void loadDivisions(boolean forceUpdate);
+        void loadDivisions();
 
     }
 }

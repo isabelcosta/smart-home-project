@@ -5,6 +5,14 @@
 
     <dimen name="custom_button_width">500dp</dimen>
 
+    <!-- Login Activity -->
+
+    <dimen name="remember_me_padding_top_bottom">10dp</dimen>
+    <dimen name="remember_me_padding_right_left">20dp</dimen>
+    <dimen name="credentials_margin">30dp</dimen>
+
+
+
     <!-- Bottom Menu Navigation -->
 
     <dimen name="menu_icon_size">50dp</dimen>
@@ -16,5 +24,8 @@
     <dimen name="division_item_icon_size">150dp</dimen>
     <dimen name="division_item_text_size">24sp</dimen>
     <dimen name="division_grid_margin">20dp</dimen>
+    <dimen name="no_division_icon_size">350dp</dimen>
+    <dimen name="no_division_text_size">32sp</dimen>
+
 
 </resources>

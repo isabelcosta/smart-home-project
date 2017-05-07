@@ -27,6 +27,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -58,6 +59,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import butterknife.BindView;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static com.example.smarthomeapp.util.Constants.XML_FILE_TO_LOAD;
 
 /**
  * A login screen that offers login via email/password.
@@ -110,6 +112,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     @BindView(R.id.load_xml_loader_error)
     ImageView mHouseConfigLoaderError;
 
+    @BindView(R.id.remember_checkbox_layout)
+    View mRememberMeLayout;
+
+    @BindView(R.id.remember_checkbox)
+    CheckBox mRememberMeCheckbox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,6 +153,15 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             @Override
             public void onClick(View v) {
                 loadHouseConfig();
+            }
+        });
+
+        // Set click area to be bigger than the checkbox
+        mRememberMeLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean isChecked = mRememberMeCheckbox.isChecked();
+                mRememberMeCheckbox.setChecked(!isChecked);
             }
         });
     }
@@ -441,7 +458,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         protected Boolean doInBackground(Void... params) {
 
             try {
-                // Simulate network access.
+                // Simulate file access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
@@ -451,7 +468,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             try {
 
                 // TODO: 05-May-17 reading HARDCODED house configuration file 
-                InputStream is = getResources().openRawResource(R.raw.basic_config_1);
+                InputStream is = getResources().openRawResource(XML_FILE_TO_LOAD);
 
                 SAXReader reader = new SAXReader();
                 document = reader.read(is);

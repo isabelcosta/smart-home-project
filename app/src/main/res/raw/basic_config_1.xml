@@ -122,6 +122,7 @@
 
     <UserList>
         <User ID="1" Name="maria" Password="123" AccessLevel="9" />
+        <User ID="2" Name="1" Password="1" AccessLevel="9" />
     </UserList>
 
     <!-- House or building structure -->

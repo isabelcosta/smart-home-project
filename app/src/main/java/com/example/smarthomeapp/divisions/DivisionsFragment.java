@@ -37,7 +37,7 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
  */
 public class DivisionsFragment extends BaseFragment implements DivisionsContract.View{
 
-    private DivisionsContract.Presenter mPresenter;
+    private DivisionsContract.Presenter mDivisionsPresenter;
 
     private DivisionsAdapter mDivisionsAdapter;
 
@@ -75,6 +75,17 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Create the presenter
+        mDivisionsPresenter = new DivisionsPresenter(this);
+
+        mDivisionsAdapter = new DivisionsAdapter(getContext(), new ArrayList<Division>(0));
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mDivisionsPresenter.start();
     }
 
     @Override
@@ -85,10 +96,6 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_divisions, container, false);
         ButterKnife.bind(this, view);
-
-        List<Division> divisionsList = SmartHomeApplication.getInstance().getHomeConfiguration().getDivisionList();
-
-        mDivisionsAdapter = new DivisionsAdapter(getContext(), divisionsList);
 
         divisionsGridView.setAdapter(mDivisionsAdapter);
 
@@ -129,7 +136,7 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
 
     @Override
     public void setPresenter(@NonNull DivisionsContract.Presenter presenter) {
-        mPresenter = checkNotNull(presenter);
+        mDivisionsPresenter = checkNotNull(presenter);
     }
 
     @Override
@@ -139,6 +146,7 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
 
     @Override
     public void showDivisions(List<Division> tasks) {
+
         mDivisionsAdapter.replaceData(tasks);
 
         mDivisionsView.setVisibility(View.VISIBLE);
