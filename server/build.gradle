@@ -3,6 +3,7 @@ apply plugin: 'java'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':commonlib')
+    compile 'org.json:json:20160810'
 }
 
 sourceCompatibility = "1.7"

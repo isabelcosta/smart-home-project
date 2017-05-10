@@ -4,13 +4,15 @@ import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import org.json.JSONObject;
+
 import java.io.*;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.*;
 
 /**
- * Source code from Andy Feng
+ * Inspired by Source code from Andy Feng
  * https://www.codeproject.com/Tips/1040097/Create-a-Simple-Web-Server-in-Java-HTTP-Server
  */
 public class Handlers {
@@ -84,6 +86,34 @@ public class Handlers {
 			os.close();
 
 		}
+	}
+
+	public static class EchoGetJSONHandler implements HttpHandler {
+
+		@Override
+		public void handle(HttpExchange he) throws IOException {
+			// parse request
+			Map<String, Object> parameters = new HashMap<String, Object>();
+			URI requestedUri = he.getRequestURI();
+			String query = requestedUri.getRawQuery();
+			parseQuery(query, parameters);
+
+			String jsonString = new JSONObject()
+					.put("JSON1", "Hello World!")
+					.put("JSON2", "Hello my World!")
+					.put("JSON3", new JSONObject()
+							.put("key1", "value1")).toString();
+
+			System.out.println(jsonString);
+
+			// send response
+			String response = jsonString;
+			he.sendResponseHeaders(200, response.length());
+			OutputStream os = he.getResponseBody();
+			os.write(response.toString().getBytes());
+			os.close();
+		}
+
 	}
 
 	@SuppressWarnings("unchecked")

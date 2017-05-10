@@ -13,7 +13,7 @@ public class SimpleHttpServer {
 	private int port;
 	private HttpServer server;
 
-	public void Start(int port) {
+	public void start(int port) {
 		try {
 			this.port = port;
 			server = HttpServer.create(new InetSocketAddress(port), 0);
@@ -22,6 +22,7 @@ public class SimpleHttpServer {
 			server.createContext("/echoHeader", new Handlers.EchoHeaderHandler());
 			server.createContext("/echoGet", new Handlers.EchoGetHandler());
 			server.createContext("/echoPost", new Handlers.EchoPostHandler());
+			server.createContext("/getJSON", new Handlers.EchoGetJSONHandler());
 			server.setExecutor(null);
 			server.start();
 		} catch (IOException e) {
