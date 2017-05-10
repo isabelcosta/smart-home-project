@@ -21,10 +21,10 @@ import static com.example.smarthomeapp.util.Constants.DivisionType.LIVING_ROOM;
 public class IconUtils {
 
 
-//    static HashMap<String, Integer> iconsMap = new HashMap<>();
+    private static HashMap<String, Integer> iconsMap = new HashMap<>();
 
     static {
-        HashMap<String, Integer> iconsMap = new HashMap<>();
+//        HashMap<String, Integer> iconsMap = new HashMap<>();
         iconsMap.put(BEDROOM, R.drawable.ic_bed);
         iconsMap.put(KITCHEN, R.drawable.ic_fridge);
         iconsMap.put(BATHROOM, R.drawable.ic_toilet);
@@ -35,7 +35,9 @@ public class IconUtils {
     }
 
 
-
+    public static HashMap<String, Integer> getIconsMap(){
+        return iconsMap;
+    }
 
 
 }

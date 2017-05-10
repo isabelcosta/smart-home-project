@@ -1,4 +1,4 @@
-package com.example.smarthomeapp.presentation.ui;
+package com.example.smarthomeapp.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
 import android.content.CursorLoader;
@@ -27,20 +26,34 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.smarthomeapp.R;
+import com.example.smarthomeapp.BaseActivity;
+import com.example.smarthomeapp.MainActivity;
+import com.example.smarthomeapp.app.SmartHomeApplication;
+import com.example.smarthomeapp.util.Constants;
+import com.example.smarthomeapp.util.LoadXMLAsyncTask;
+import com.example.smarthomeapp.util.SharedPreferencesUtils;
+import com.example.utils.domain.HomeConfigEntity;
+import com.example.utils.domain.User;
+
+import butterknife.BindView;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends BaseActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends BaseActivity implements LoaderCallbacks<Cursor>, LoginContract.View {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -58,12 +71,42 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+    private LoadXMLAsyncTask mLoadHouseTask = null;
+    private LoginContract.Presenter mLoginPresenter;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    @BindView(R.id.email)
+    AutoCompleteTextView mEmailView;
+
+    @BindView(R.id.password)
+    EditText mPasswordView;
+
+    @BindView(R.id.login_progress)
+    View mProgressView;
+
+    @BindView(R.id.login_form)
+    View mLoginFormView;
+
+    @BindView(R.id.email_sign_in_button)
+    Button mEmailSignInButton;
+
+    @BindView(R.id.load_house_config_button)
+    Button mHouseConfigBtn;
+
+    @BindView(R.id.load_xml_loader)
+    ProgressBar mHouseConfigLoader;
+
+    @BindView(R.id.load_xml_loader_check)
+    ImageView mHouseConfigLoaderCheck;
+
+    @BindView(R.id.load_xml_loader_error)
+    ImageView mHouseConfigLoaderError;
+
+    @BindView(R.id.remember_checkbox_layout)
+    View mRememberMeLayout;
+
+    @BindView(R.id.remember_checkbox)
+    CheckBox mRememberMeCheckbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +116,11 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         getSupportActionBar().hide();
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        // Create the presenter
+        mLoginPresenter = new LoginPresenter(this);
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -88,7 +132,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,8 +139,24 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        // Avoid a user to log into app without house configuration
+        mEmailSignInButton.setClickable(false);
+
+        mHouseConfigBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadHouseConfig();
+            }
+        });
+
+        // Set click area to be bigger than the checkbox
+        mRememberMeLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean isChecked = mRememberMeCheckbox.isChecked();
+                mRememberMeCheckbox.setChecked(!isChecked);
+            }
+        });
     }
 
     @Override
@@ -201,6 +260,23 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
     }
 
+    private void loadHouseConfig(){
+        if (mLoadHouseTask != null) {
+            return;
+        }
+
+        if (SmartHomeApplication.getInstance().getHomeConfiguration() != null) {
+            mHouseConfigLoaderCheck.setVisibility(View.VISIBLE);
+            mEmailSignInButton.setClickable(true);
+            Toast.makeText(this, "House is already loaded", Toast.LENGTH_LONG).show();
+        } else {
+            mHouseConfigLoader.setVisibility(View.VISIBLE);
+
+            mLoadHouseTask = new LoadXMLAsyncTask(getBaseContext(), mLoginPresenter);
+            mLoadHouseTask.execute();
+        }
+    }
+
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
 //        return email.contains("@");
@@ -210,6 +286,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return true;
+    }
+
+
+    private void saveLoginData(String userId, boolean rememberMe){
+        SharedPreferencesUtils.setStringPreference(getBaseContext(), Constants.Login.USER_ID, userId);
+        SharedPreferencesUtils.setBooleanPreference(getBaseContext(), Constants.Login.REMEMBER_ME, rememberMe);
     }
 
     /**
@@ -291,6 +373,44 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         mEmailView.setAdapter(adapter);
     }
 
+    @Override
+    public void setPresenter(@NonNull LoginContract.Presenter presenter) {
+        mLoginPresenter = presenter;
+    }
+
+    @Override
+    public void setLoadingIndicator(boolean active) {
+
+    }
+
+    @Override
+    public void showHouseConfigResult(HomeConfigEntity homeConfigEntity) {
+        mLoadHouseTask = null;
+        showProgress(false);
+        mHouseConfigLoader.setVisibility(View.GONE);
+
+        if (homeConfigEntity != null) {
+            SmartHomeApplication.getInstance().setHomeConfiguration(homeConfigEntity);
+
+            mEmailSignInButton.setClickable(true);
+            mHouseConfigLoaderCheck.setVisibility(View.VISIBLE);
+            Toast.makeText(LoginActivity.this, "House Load SUCCESSFUL", Toast.LENGTH_LONG).show();
+        } else {
+            mHouseConfigLoaderError.setVisibility(View.VISIBLE);
+            Toast.makeText(LoginActivity.this, "House Load FAILED", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void cancelLoadAsyncTask() {
+        mLoadHouseTask = null;
+    }
+
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -306,46 +426,47 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, User> {
 
-        private final String mEmail;
+        private final String mUsername;
         private final String mPassword;
 
-        UserLoginTask(String email, String password) {
-            mEmail = email;
+        UserLoginTask(String username, String password) {
+            mUsername = username;
             mPassword = password;
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected User doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                return false;
+                return null;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+            List<User> users = SmartHomeApplication.getInstance().getHomeConfiguration().getUserList();
+
+            for (User user : users) {
+                if (mUsername.equals(user.getName()) && mPassword.equals(user.getPassword())){
+                    return user;
                 }
             }
 
-            // TODO: register the new account here.
-            return true;
+            return null;
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final User loggedUser) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
-                // TODO: 29/03/2017 create home/divisions activity
+            if (loggedUser != null) {
+                SmartHomeApplication.getInstance().setUserEntity(loggedUser);
+                saveLoginData(loggedUser.getId(), mRememberMeCheckbox.isChecked());
+
                 Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
 
                 /* Create an Intent that will start the Home Activity. */

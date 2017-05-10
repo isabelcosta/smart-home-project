@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +12,7 @@
         android:layout_width="@dimen/division_item_icon_size"
         android:layout_height="@dimen/division_item_icon_size"
         android:id="@+id/division_image"
-        tools:src="@drawable/ic_android_black_24dp"
+        tools:src="@drawable/ic_android"
         android:layout_marginBottom="20dp"/>
     <TextView
         android:layout_width="wrap_content"
