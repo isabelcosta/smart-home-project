@@ -41,18 +41,23 @@ import static com.example.utils.HouseConfigConstants.USER_LIST;
  */
 public class DomoBusConfigLoader {
 
-    private String _configFilesPackage = "./commonlib/src/main/java/com/example/utils/configs";
+    private String _configFilesCommonPackage = "./commonlib/src/main/java/com/example/utils/configs";
+    private String _configFilesServerPackage = "./server/src/main/java/com/example/server/configs";
     private HomeConfigEntity _homeConfig;
 
     public DomoBusConfigLoader(){}
 
     // Structures
 
-    public DomoBusConfigLoader(String configFileName) {
+    public DomoBusConfigLoader(String configFileName, boolean isFromServer) {
 
         try {
 
-            File directoryFiles = new File(_configFilesPackage); // your folder path
+            File directoryFiles = new File(isFromServer
+                    ? _configFilesServerPackage
+                    : _configFilesCommonPackage
+            ); // config file folder path
+
             File[] filesList = directoryFiles.listFiles(); // It gives list of all files in the folder.
 
             File file = null;
@@ -98,14 +103,14 @@ public class DomoBusConfigLoader {
 
         // Root class is DomoBusSystem
         Element classElement = document.getRootElement();
-
-        List<Node> nodes = classElement.selectNodes(DEVICE_CLASS_LIST + "/" + DEVICE_CLASS);
-        System.out.println("----------------------------\n");
-        for (Node node : nodes) {
-            System.out.println("Current Element : " + node.getName());
-            System.out.println("ID : " + node.valueOf(getAttribute(ID)));
-            System.out.println("Name : " + node.valueOf(getAttribute(NAME)));
-        }
+//
+//        List<Node> nodes = classElement.selectNodes(DEVICE_CLASS_LIST + "/" + DEVICE_CLASS);
+//        System.out.println("----------------------------\n");
+//        for (Node node : nodes) {
+//            System.out.println("Current Element : " + node.getName());
+//            System.out.println("ID : " + node.valueOf(getAttribute(ID)));
+//            System.out.println("Name : " + node.valueOf(getAttribute(NAME)));
+//        }
 
         parseFloors(classElement);
         parseDivisions(classElement);
@@ -198,7 +203,7 @@ public class DomoBusConfigLoader {
 
     public static void main(String[] args) {
 
-        DomoBusConfigLoader configLoader = new DomoBusConfigLoader("basic_config_1.xml");
+        DomoBusConfigLoader configLoader = new DomoBusConfigLoader("basic_config_1.xml", false);
         for (Division d : configLoader.getHomeConfig().getDivisionList()){
             System.out.println(d.getName());
         }
