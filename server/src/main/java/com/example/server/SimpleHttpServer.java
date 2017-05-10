@@ -10,14 +10,16 @@ import java.net.InetSocketAddress;
  * https://www.codeproject.com/Tips/1040097/Create-a-Simple-Web-Server-in-Java-HTTP-Server
  */
 public class SimpleHttpServer {
-	private int port;
+
 	private HttpServer server;
 
 	public void start(int port) {
 		try {
-			this.port = port;
+
 			server = HttpServer.create(new InetSocketAddress(port), 0);
-			System.out.println("server started at " + port);
+			System.out.println("Server started at " + port);
+
+			// Creating HTTP context
 			server.createContext("/", new com.example.server.Handlers.RootHandler());
 			server.createContext("/echoHeader", new Handlers.EchoHeaderHandler());
 			server.createContext("/echoGet", new Handlers.EchoGetHandler());

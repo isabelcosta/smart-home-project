@@ -1,5 +1,6 @@
 package com.example.utils.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,8 @@ public class HomeConfigEntity {
     private List<Division> _divisionList;
     private List<DivisionType> _divisionTypeList;
     private List<User> _userList;
+    private List<ScalarValueType> _scalarValueList;
+    private List<EnumValueType> _enumValueList;
 
     public static HomeConfigEntity getInstance(){
         if (_instance == null){
@@ -24,6 +27,10 @@ public class HomeConfigEntity {
         }
         return _instance;
     }
+
+    /**
+     * Getters and Setters
+     */
 
     public List<Device> getDeviceList() {
         return _deviceList;
@@ -41,8 +48,24 @@ public class HomeConfigEntity {
         return _floorList;
     }
 
+    public List<ScalarValueType> getScalarValueTypeList() {
+        return _scalarValueList;
+    }
+
     public void setFloorList(List<Floor> floorList){
         _floorList = floorList;
+    }
+
+    public List<EnumValueType> getEnumValueList() {
+        return _enumValueList;
+    }
+
+    public void setEnumValueTypeList(List<EnumValueType> enumValueList) {
+        _enumValueList = enumValueList;
+    }
+
+    public void setScalarValueTypeList(List<ScalarValueType> scalarValueList){
+        _scalarValueList = scalarValueList;
     }
 
     public List<Division> getDivisionList(){
@@ -53,8 +76,8 @@ public class HomeConfigEntity {
         _divisionList = divisionList;
     }
 
-    public void setDivisionTypeList(List<DivisionType> _divisionTypeList){
-        _divisionTypeList = _divisionTypeList;
+    public void setDivisionTypeList(List<DivisionType> divisionTypeList){
+        _divisionTypeList = divisionTypeList;
     }
 
     public List<User> getUserList() {
@@ -65,4 +88,57 @@ public class HomeConfigEntity {
         this._userList = userList;
     }
 
+    public void setDeviceList(List<Device> deviceList) {
+        this._deviceList = deviceList;
+    }
+
+    public void setServiceList(List<Service> serviceList) {
+        this._serviceList = serviceList;
+    }
+
+    public void setHouse(House house) {
+        this._house = house;
+    }
+
+
+    /**
+     * Get Object By IDs
+     */
+
+    public User getUserByID(String userID){
+        for(User user : _userList){
+            if(userID.equals(user.getId())){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public Device getDeviceByID(String deviceID){
+        for(Device device : _deviceList){
+            if(deviceID.equals(device.getId())){
+                return device;
+            }
+        }
+        return null;
+    }
+
+    public Division getDivisionByID(String divisionID){
+        for(Division division : _divisionList){
+            if(divisionID.equals(division.getId())){
+                return division;
+            }
+        }
+        return null;
+    }
+
+    public List<Device> getDeviceByDivisionID(String divisionID){
+        List<Device> devicesList = new ArrayList<>();
+        for(Device device : _deviceList){
+            if(device.getRefDivision().equals(divisionID)){
+                devicesList.add(device);
+            }
+        }
+        return devicesList;
+    }
 }

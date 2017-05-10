@@ -68,6 +68,7 @@ public class HouseConfigConstants {
     public static final String REF_DIVISION_TYPE = "RefDivisionType";
     public static final String REF_USER = "RefUser";
     public static final String REF_PROPERTY = "RefProperty";
+    public static final String REF_SERVICE = "RefService";
 
     public static final String VALUE = "Value";
     public static final String INVALID_VALUE = "InvalidValue";
@@ -128,5 +129,14 @@ public class HouseConfigConstants {
     public static final String MIN_VALUE = "MinValue";
     public static final String UNITS = "Units";
     public static final String STEP = "Step";
+
+    public static final String ENUM = "ENUM";
+    public static final String SCALAR = "SCALAR";
+
+
+    /**
+     * Other
+     */
+    public static final String DOMO_VALUE_SEPARATOR = ","; // basically COMMA
 
 }
