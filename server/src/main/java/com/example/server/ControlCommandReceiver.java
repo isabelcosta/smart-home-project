@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Created by isabelcosta on 10-May-17.
  */
 
-public class HouseControlCommand {
+public class ControlCommandReceiver {
 
     private String initialOptions = "\n" + "Execute one of these commands:"
             + "\n" + "{1} SET <deviceX> to <valueX> -> set a device's value"

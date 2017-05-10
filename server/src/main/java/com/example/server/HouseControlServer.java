@@ -26,7 +26,7 @@ public class HouseControlServer {
 		// start http server
 		SimpleHttpServer httpServer = new SimpleHttpServer();
 		httpServer.start(PORT);
-		HouseControlCommand commandReceiver = new HouseControlCommand();
+		ControlCommandReceiver commandReceiver = new ControlCommandReceiver();
 		commandReceiver.start();
 	}
 }
