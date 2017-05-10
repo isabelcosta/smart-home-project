@@ -23,6 +23,6 @@ public class Constants {
     public interface Login {
         String USERNAME = "USERNAME";
         String USER_ID = "USER_ID";
-        String IS_LOGGED = "IS_LOGGED";
+        String REMEMBER_ME = "REMEMBER_ME";
     }
 }

@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:name=".app.SmartHomeApplication">
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".splash.SplashScreenActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

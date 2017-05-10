@@ -1,6 +1,5 @@
 package com.example.smarthomeapp.settings;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.smarthomeapp.BaseFragment;
-import com.example.smarthomeapp.MainActivity;
 import com.example.smarthomeapp.R;
 import com.example.smarthomeapp.login.LoginActivity;
 import com.example.smarthomeapp.util.Constants;
@@ -85,6 +83,6 @@ public class SettingsFragment extends BaseFragment {
 
     private void removeLoginData(){
         SharedPreferencesUtils.setStringPreference(getContext(), Constants.Login.USER_ID, null);
-        SharedPreferencesUtils.setBooleanPreference(getContext(), Constants.Login.IS_LOGGED, false);
+        SharedPreferencesUtils.setBooleanPreference(getContext(), Constants.Login.REMEMBER_ME, false);
     }
 }

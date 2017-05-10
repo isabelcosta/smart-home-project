@@ -1,21 +1,20 @@
-package com.example.smarthomeapp.login;
+package com.example.smarthomeapp.splash;
 
-import com.example.smarthomeapp.BasePresenter;
 import com.example.smarthomeapp.BaseView;
 import com.example.smarthomeapp.HouseConfigLoadPresenter;
-import com.example.smarthomeapp.divisions.DivisionsContract;
-import com.example.utils.domain.Division;
+import com.example.smarthomeapp.login.LoginContract;
 import com.example.utils.domain.HomeConfigEntity;
-
-import java.util.List;
 
 /**
  * Created by isabelcosta on 10-May-17.
  */
 
-public interface LoginContract {
+public interface SplashScreenContract {
 
-    interface View extends BaseView<LoginContract.Presenter> {
+    int MAIN_SCREEN = 1;
+    int LOGIN = 2;
+
+    interface View extends BaseView<SplashScreenContract.Presenter> {
 
         void setLoadingIndicator(boolean active);
 
@@ -24,6 +23,8 @@ public interface LoginContract {
         void cancelLoadAsyncTask();
 
         boolean isActive();
+
+        void enterMainScreen(int screenToGoTo);
 
     }
 
