@@ -14,12 +14,9 @@ import android.widget.Toast;
 
 import com.example.smarthomeapp.R;
 import com.example.smarthomeapp.BaseFragment;
-import com.example.smarthomeapp.SmartHomeApplication;
-import com.example.smarthomeapp.util.DummyData;
 import com.example.utils.domain.Division;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -75,6 +72,7 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // Create the presenter
         mDivisionsPresenter = new DivisionsPresenter(this);
 

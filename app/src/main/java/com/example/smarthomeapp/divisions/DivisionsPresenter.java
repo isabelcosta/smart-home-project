@@ -2,14 +2,13 @@ package com.example.smarthomeapp.divisions;
 
 import android.support.annotation.NonNull;
 
-import com.example.smarthomeapp.SmartHomeApplication;
+import com.example.smarthomeapp.app.SmartHomeApplication;
 
 /**
  * Created by isabelcosta on 06-May-17.
  */
 
 public class DivisionsPresenter implements DivisionsContract.Presenter {
-
 
     private final DivisionsContract.View mDivisionsView;
 

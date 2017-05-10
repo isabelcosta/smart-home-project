@@ -3,6 +3,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- Settings Activity -->
+    <dimen name="setting_option_padding">24dp</dimen>
+    <dimen name="setting_option_text_size">24sp</dimen>
+
     <dimen name="custom_button_width">500dp</dimen>
 
     <!-- Login Activity -->

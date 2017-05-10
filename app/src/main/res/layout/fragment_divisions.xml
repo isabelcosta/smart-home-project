@@ -38,6 +38,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:numColumns="3"
+            android:verticalSpacing="10dp"
             android:horizontalSpacing="30dp"
             android:layout_margin="@dimen/division_grid_margin"
             android:stretchMode="columnWidth"/>

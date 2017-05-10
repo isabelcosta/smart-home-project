@@ -1,6 +1,7 @@
 package com.example.smarthomeapp.settings;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.smarthomeapp.BaseFragment;
+import com.example.smarthomeapp.MainActivity;
 import com.example.smarthomeapp.R;
+import com.example.smarthomeapp.login.LoginActivity;
+import com.example.smarthomeapp.util.Constants;
+import com.example.smarthomeapp.util.SharedPreferencesUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,24 +31,17 @@ public class SettingsFragment extends BaseFragment {
 
     private OnFragmentInteractionListener mListener;
 
+    @BindView(R.id.log_out_selectable_area)
+    View mLogOutButton;
+
     public SettingsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingsFragment.
-     */
     // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance(String param1, String param2) {
+    public static SettingsFragment newInstance() {
         SettingsFragment fragment = new SettingsFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,18 +49,31 @@ public class SettingsFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        ButterKnife.bind(this, view);
+
+        mLogOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeLoginData();
+
+                Intent mainIntent = new Intent(getContext(), LoginActivity.class);
+
+                /* Create an Intent that will start the Home Activity. */
+                SettingsFragment.this.startActivity(mainIntent);
+                getActivity().finish();
+            }
+        });
+
+        // Inflate the layout for this fragment
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -67,5 +81,10 @@ public class SettingsFragment extends BaseFragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    private void removeLoginData(){
+        SharedPreferencesUtils.setStringPreference(getContext(), Constants.Login.USER_ID, null);
+        SharedPreferencesUtils.setBooleanPreference(getContext(), Constants.Login.IS_LOGGED, false);
     }
 }

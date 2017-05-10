@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.XmlResourceParser;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -34,7 +33,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +40,11 @@ import java.util.List;
 import com.example.smarthomeapp.R;
 import com.example.smarthomeapp.BaseActivity;
 import com.example.smarthomeapp.MainActivity;
-import com.example.smarthomeapp.SmartHomeApplication;
+import com.example.smarthomeapp.app.SmartHomeApplication;
+import com.example.smarthomeapp.divisions.DivisionsContract;
+import com.example.smarthomeapp.util.Constants;
+import com.example.smarthomeapp.util.LoadXMLAsyncTask;
+import com.example.smarthomeapp.util.SharedPreferencesUtils;
 import com.example.utils.DomoBusConfigLoader;
 import com.example.utils.domain.HomeConfigEntity;
 import com.example.utils.domain.User;
@@ -50,11 +52,6 @@ import com.example.utils.domain.User;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import butterknife.BindView;
 
@@ -64,7 +61,7 @@ import static com.example.smarthomeapp.util.Constants.XML_FILE_TO_LOAD;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends BaseActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends BaseActivity implements LoaderCallbacks<Cursor>, LoginContract.View {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -82,7 +79,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-    private LoadXMLTask mLoadHouseTask = null;
+    private LoadXMLAsyncTask mLoadHouseTask = null;
+    private LoginContract.Presenter mLoginPresenter;
 
     // UI references.
     @BindView(R.id.email)
@@ -127,6 +125,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
         // Set up the login form.
         populateAutoComplete();
+
+        // Create the presenter
+        mLoginPresenter = new LoginPresenter(this);
 
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -273,11 +274,13 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
 
         if (SmartHomeApplication.getInstance().getHomeConfiguration() != null) {
+            mHouseConfigLoaderCheck.setVisibility(View.VISIBLE);
+            mEmailSignInButton.setClickable(true);
             Toast.makeText(this, "House is already loaded", Toast.LENGTH_LONG).show();
         } else {
             mHouseConfigLoader.setVisibility(View.VISIBLE);
 
-            mLoadHouseTask = new LoadXMLTask();
+            mLoadHouseTask = new LoadXMLAsyncTask(getBaseContext(), mLoginPresenter);
             mLoadHouseTask.execute();
         }
     }
@@ -291,6 +294,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return true;
+    }
+
+
+    private void saveLoginData(String userId){
+        SharedPreferencesUtils.setStringPreference(getBaseContext(), Constants.Login.USER_ID, userId);
+        SharedPreferencesUtils.setBooleanPreference(getBaseContext(), Constants.Login.IS_LOGGED, true);
     }
 
     /**
@@ -372,6 +381,44 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         mEmailView.setAdapter(adapter);
     }
 
+    @Override
+    public void setPresenter(@NonNull LoginContract.Presenter presenter) {
+        mLoginPresenter = presenter;
+    }
+
+    @Override
+    public void setLoadingIndicator(boolean active) {
+
+    }
+
+    @Override
+    public void showHouseConfigResult(HomeConfigEntity homeConfigEntity) {
+        mLoadHouseTask = null;
+        showProgress(false);
+        mHouseConfigLoader.setVisibility(View.GONE);
+
+        if (homeConfigEntity != null) {
+            SmartHomeApplication.getInstance().setHomeConfiguration(homeConfigEntity);
+
+            mEmailSignInButton.setClickable(true);
+            mHouseConfigLoaderCheck.setVisibility(View.VISIBLE);
+            Toast.makeText(LoginActivity.this, "House Load SUCCESSFUL", Toast.LENGTH_LONG).show();
+        } else {
+            mHouseConfigLoaderError.setVisibility(View.VISIBLE);
+            Toast.makeText(LoginActivity.this, "House Load FAILED", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void cancelLoadAsyncTask() {
+        mLoadHouseTask = null;
+    }
+
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -425,6 +472,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             showProgress(false);
 
             if (loggedUser != null) {
+                SmartHomeApplication.getInstance().setUserEntity(loggedUser);
+                saveLoginData(loggedUser.getId());
+
                 Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
 
                 /* Create an Intent that will start the Home Activity. */
@@ -443,71 +493,72 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
     }
 
-    /**
-     * Represents an asynchronous load house configuration task used to build the
-     * structure of the house.
-     */
-
-    public class LoadXMLTask extends AsyncTask<Void, Void, Boolean> {
-
-        private HomeConfigEntity mHomeConfig;
-
-        LoadXMLTask() { }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-
-            try {
-                // Simulate file access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            Document document;
-            try {
-
-                // TODO: 05-May-17 reading HARDCODED house configuration file 
-                InputStream is = getResources().openRawResource(XML_FILE_TO_LOAD);
-
-                SAXReader reader = new SAXReader();
-                document = reader.read(is);
-                
-            } catch (DocumentException e) {
-                e.printStackTrace();
-                return false;
-            }
-
-            if (document != null) {
-                DomoBusConfigLoader domoBusLoader = new DomoBusConfigLoader(document);
-                mHomeConfig = domoBusLoader.getHomeConfig();
-            }
-
-            return !(mHomeConfig == null);
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mLoadHouseTask = null;
-            showProgress(false);
-
-            mHouseConfigLoader.setVisibility(View.GONE);
-            if (success) {
-                SmartHomeApplication.getInstance().setHomeConfiguration(mHomeConfig);
-                mHouseConfigLoaderCheck.setVisibility(View.VISIBLE);
-                mEmailSignInButton.setClickable(true);
-                Toast.makeText(LoginActivity.this, "House Load SUCCESSFUL", Toast.LENGTH_LONG).show();
-            } else {
-                mHouseConfigLoaderError.setVisibility(View.VISIBLE);
-                Toast.makeText(LoginActivity.this, "House Load FAILED", Toast.LENGTH_LONG).show();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mLoadHouseTask = null;
-
-        }
-    }
+//    /**
+//     * Represents an asynchronous load house configuration task used to build the
+//     * structure of the house.
+//     */
+//
+//    public class LoadXMLTask extends AsyncTask<Void, Void, HomeConfigEntity> {
+//
+//        private HomeConfigEntity mHomeConfig;
+//
+//        LoadXMLTask() { }
+//
+//        @Override
+//        protected HomeConfigEntity doInBackground(Void... params) {
+//
+//            try {
+//                // Simulate file access.
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                return null;
+//            }
+//
+//            Document document;
+//            try {
+//
+//                // TODO: 05-May-17 reading HARDCODED house configuration file
+//                InputStream is = getResources().openRawResource(XML_FILE_TO_LOAD);
+//
+//                SAXReader reader = new SAXReader();
+//                document = reader.read(is);
+//
+//            } catch (DocumentException e) {
+//                e.printStackTrace();
+//                return null;
+//            }
+//
+//            if (document != null) {
+//                DomoBusConfigLoader domoBusLoader = new DomoBusConfigLoader(document);
+//                mHomeConfig = domoBusLoader.getHomeConfig();
+//            }
+//
+//            return mHomeConfig;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(final HomeConfigEntity homeConfigEntity) {
+//            mLoadHouseTask = null;
+//            showProgress(false);
+//            mHouseConfigLoader.setVisibility(View.GONE);
+//
+//            if (homeConfigEntity != null) {
+//                SmartHomeApplication.getInstance().setHomeConfiguration(mHomeConfig);
+//
+//                mEmailSignInButton.setClickable(true);
+//                mHouseConfigLoaderCheck.setVisibility(View.VISIBLE);
+//                Toast.makeText(LoginActivity.this, "House Load SUCCESSFUL", Toast.LENGTH_LONG).show();
+//            } else {
+//                mHouseConfigLoaderError.setVisibility(View.VISIBLE);
+//                Toast.makeText(LoginActivity.this, "House Load FAILED", Toast.LENGTH_LONG).show();
+//            }
+//        }
+//
+//        @Override
+//        protected void onCancelled() {
+//            mLoadHouseTask = null;
+//
+//        }
+//    }
 }
 
