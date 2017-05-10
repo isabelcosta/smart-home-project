@@ -153,7 +153,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         mRememberMeLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean isChecked = mRememberMeCheckbox.isChecked();
+                boolean isChecked = mRememberMeCheckbox.isChecked();
                 mRememberMeCheckbox.setChecked(!isChecked);
             }
         });

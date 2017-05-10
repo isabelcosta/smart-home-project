@@ -144,7 +144,7 @@ public class SplashScreenActivity extends BaseActivity implements SplashScreenCo
         return null;
     }
 
-    private Boolean isRememberMe(){
+    private boolean isRememberMe(){
         return SharedPreferencesUtils.getBooleanPreference(getBaseContext(), Constants.Login.REMEMBER_ME, false);
     }
 }
