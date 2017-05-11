@@ -138,6 +138,11 @@ public class HouseConfigConstants {
 
     public static final String ENUM = "ENUM";
     public static final String SCALAR = "SCALAR";
+    public static final String ARRAY = "ARRAY";
+
+    public static final String READ_AND_WRITE = "RW";
+    public static final String READ_ONLY = "RO";
+    public static final String WRITE_ONLY = "WO";
 
 
     /**

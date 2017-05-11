@@ -25,6 +25,7 @@ public class SimpleHttpServer {
 			server.createContext("/echoGet", new Handlers.EchoGetHandler());
 			server.createContext("/echoPost", new Handlers.EchoPostHandler());
 			server.createContext("/getJSON", new Handlers.EchoGetJSONHandler());
+			server.createContext("/devices", new Handlers.EchoGetJSONHandler());
 			server.setExecutor(null);
 			server.start();
 		} catch (IOException e) {

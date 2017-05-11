@@ -151,13 +151,6 @@
 
     <!-- Devices -->
 
-    <!--<DeviceList>-->
-        <!--<Device ID="#" RefDeviceType="#" Name="x" Address="#" RefDivision="#" AccessLevel="#,#" UserBlocked="#,#">-->
-            <!--<DeviceServiceList>-->
-                <!--<DeviceService RefService="#" />-->
-            <!--</DeviceServiceList>-->
-        <!--</Device>-->
-    <!--</DeviceList>-->
     <DeviceList>
         <Device ID="1" RefDeviceType="1" Name="Kitchen_Lamp"
             Address="#0100" RefDivision="2" AccessLevel="3,5" UserBlocked="-,27">
@@ -165,6 +158,14 @@
         only user 27 can unblock the device or someone with greater access level than that user -->
             <DeviceServiceList>
                 <DeviceService RefService="1" />
+                <DeviceService RefService="4" />
+            </DeviceServiceList>
+        </Device>
+        <Device ID="2" RefDeviceType="2" Name="Temperature Sensor"
+            Address="#0100" RefDivision="3" AccessLevel="3,5" UserBlocked="-,27">
+            <!-- Device unblocked for reading (-) and blocked for writing by the user with ID 27;
+            only user 27 can unblock the device or someone with greater access level than that user -->
+            <DeviceServiceList>
                 <DeviceService RefService="4" />
             </DeviceServiceList>
         </Device>

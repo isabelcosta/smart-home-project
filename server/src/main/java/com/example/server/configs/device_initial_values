@@ -1,10 +1,10 @@
 <DomoBusSystemInitialValues id="1" Name="Basic Structure" Type="1.2" Version="1.0" Date="27-03-2017">
-    <Device id="1" InitialValue="1" />
-    <Device id="2" InitialValue="1" />
-    <Device id="3" InitialValue="1" />
-    <Device id="4" InitialValue="1" />
-    <Device id="5" InitialValue="1" />
-    <Device id="6" InitialValue="1" />
-    <Device id="7" InitialValue="1" />
-    <Device id="8" InitialValue="1" />
+    <Device ID="1" InitialValue="1" />
+    <Device ID="2" InitialValue="1" />
+    <Device ID="3" InitialValue="1" />
+    <Device ID="4" InitialValue="1" />
+    <Device ID="5" InitialValue="1" />
+    <Device ID="6" InitialValue="1" />
+    <Device ID="7" InitialValue="1" />
+    <Device ID="8" InitialValue="1" />
 </DomoBusSystemInitialValues>
