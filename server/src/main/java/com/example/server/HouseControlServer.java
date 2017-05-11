@@ -47,6 +47,7 @@ public class HouseControlServer {
 
 	public HouseControlServer(){
 
+		// initial values
 		DeviceStateResponse d = new DeviceStateResponse();
 		d.setDeviceId("1");
 		List<PropertyValueResponse> pvr = new ArrayList<>();
@@ -60,8 +61,15 @@ public class HouseControlServer {
 		pvr2.add(new PropertyValueResponse("1", "23"));
 		d2.setValues(pvr2);
 
+		DeviceStateResponse d3 = new DeviceStateResponse();
+		d3.setDeviceId("3");
+		List<PropertyValueResponse> pvr3 = new ArrayList<>();
+		pvr3.add(new PropertyValueResponse("1", "OFF"));
+		d3.setValues(pvr3);
+
 		devicesValues.put("1", d);
 		devicesValues.put("2", d2);
+		devicesValues.put("1", d3);
 	}
 
 	// Getters and Setters

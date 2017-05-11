@@ -16,6 +16,11 @@ public class ControlCommandReceiver {
             + "\n" + "{5} GET -D -> get all devices {id :: name}"
             + "\n" ;
 
+    /*
+    * Initial values
+    *
+    *
+    * */
 
 
     public void start() {
