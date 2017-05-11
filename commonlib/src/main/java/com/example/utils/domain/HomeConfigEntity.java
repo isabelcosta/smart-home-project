@@ -140,7 +140,7 @@ public class HomeConfigEntity {
         return null;
     }
 
-    public List<Device> getDeviceByDivisionID(String divisionID){
+    public List<Device> getDevicesByDivisionID(String divisionID){
         List<Device> devicesList = new ArrayList<>();
         for(Device device : _deviceList){
             if(device.getRefDivision().equals(divisionID)){

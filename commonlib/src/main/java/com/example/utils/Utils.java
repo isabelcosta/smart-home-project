@@ -8,8 +8,8 @@ public class Utils {
 
     // Splits a String into String[] separated by commas
 
-    public static String[] stripStringIntoV(String strList){
-        String[] separatedValues = strList.split(HouseConfigConstants.DOMO_VALUE_SEPARATOR);
+    public static String[] stripStringIntoV(String strList, String separator){
+        String[] separatedValues = strList.split(separator);
         return separatedValues;
     }
 

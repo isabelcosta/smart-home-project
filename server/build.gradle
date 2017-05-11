@@ -4,6 +4,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':commonlib')
     compile 'org.json:json:20160810'
+    compile 'com.google.code.gson:gson:2.8.0'
 }
 
 sourceCompatibility = "1.7"

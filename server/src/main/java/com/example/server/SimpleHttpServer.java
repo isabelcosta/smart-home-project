@@ -1,9 +1,11 @@
 package com.example.server;
 
+import com.example.utils.domain.HomeConfigEntity;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Source code from Andy Feng
@@ -24,8 +26,10 @@ public class SimpleHttpServer {
 			server.createContext("/echoHeader", new Handlers.EchoHeaderHandler());
 			server.createContext("/echoGet", new Handlers.EchoGetHandler());
 			server.createContext("/echoPost", new Handlers.EchoPostHandler());
-			server.createContext("/getJSON", new Handlers.EchoGetJSONHandler());
-			server.createContext("/devices", new Handlers.EchoGetJSONHandler());
+			server.createContext("/devices", new Handlers.DevicesHandler());
+			server.createContext("/divisions", new Handlers.DivisionsHandler());
+			server.createContext("/events", new Handlers.EventsHandler());
+			server.createContext("/overview", new Handlers.OverviewHandler());
 			server.setExecutor(null);
 			server.start();
 		} catch (IOException e) {

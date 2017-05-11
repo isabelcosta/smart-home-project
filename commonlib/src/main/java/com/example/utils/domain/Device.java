@@ -1,5 +1,6 @@
 package com.example.utils.domain;
 
+import com.example.utils.HouseConfigConstants;
 import com.example.utils.Utils;
 
 import java.util.List;
@@ -42,8 +43,8 @@ public class Device {
         this.name = name;
         this.address = address;
         this.refDivision = refDivision;
-        this.accessLevel = Utils.stripStringIntoV(accessLevel);
-        this.userBlocked = Utils.stripStringIntoV(userBlocked);
+        this.accessLevel = Utils.stripStringIntoV(accessLevel, HouseConfigConstants.DOMO_VALUE_SEPARATOR);
+        this.userBlocked = Utils.stripStringIntoV(userBlocked, HouseConfigConstants.DOMO_VALUE_SEPARATOR);
         this.deviceServiceList = deviceServiceList;
     }
 
