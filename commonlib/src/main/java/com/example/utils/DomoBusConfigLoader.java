@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.example.utils.domain.Device;
 import com.example.utils.domain.DeviceService;
+import com.example.utils.domain.DeviceType;
 import com.example.utils.domain.Division;
 import com.example.utils.domain.DivisionType;
 import com.example.utils.domain.EnumValueType;
@@ -14,6 +15,7 @@ import com.example.utils.domain.Enumerated;
 import com.example.utils.domain.Floor;
 import com.example.utils.domain.HomeConfigEntity;
 import com.example.utils.domain.House;
+import com.example.utils.domain.Property;
 import com.example.utils.domain.ScalarValueType;
 import com.example.utils.domain.Service;
 import com.example.utils.domain.User;
@@ -26,13 +28,17 @@ import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import static com.example.utils.HouseConfigConstants.ACCESS_LEVEL;
+import static com.example.utils.HouseConfigConstants.ACCESS_MODE;
 import static com.example.utils.HouseConfigConstants.ADDRESS;
+import static com.example.utils.HouseConfigConstants.DESCRIPTION;
 import static com.example.utils.HouseConfigConstants.DEVICE;
 import static com.example.utils.HouseConfigConstants.DEVICE_CLASS;
 import static com.example.utils.HouseConfigConstants.DEVICE_CLASS_LIST;
 import static com.example.utils.HouseConfigConstants.DEVICE_LIST;
 import static com.example.utils.HouseConfigConstants.DEVICE_SERVICE;
 import static com.example.utils.HouseConfigConstants.DEVICE_SERVICE_LIST;
+import static com.example.utils.HouseConfigConstants.DEVICE_TYPE;
+import static com.example.utils.HouseConfigConstants.DEVICE_TYPE_LIST;
 import static com.example.utils.HouseConfigConstants.DIVSION;
 import static com.example.utils.HouseConfigConstants.DIVSION_LIST;
 import static com.example.utils.HouseConfigConstants.DIVSION_TYPE;
@@ -51,11 +57,15 @@ import static com.example.utils.HouseConfigConstants.NAME;
 import static com.example.utils.HouseConfigConstants.NUM_BITS;
 import static com.example.utils.HouseConfigConstants.PASSWORD;
 import static com.example.utils.HouseConfigConstants.PHONE;
+import static com.example.utils.HouseConfigConstants.PROPERTY;
+import static com.example.utils.HouseConfigConstants.PROPERTY_LIST;
+import static com.example.utils.HouseConfigConstants.REF_DEVICE_CLASS;
 import static com.example.utils.HouseConfigConstants.REF_DEVICE_TYPE;
 import static com.example.utils.HouseConfigConstants.REF_DIVISION;
 import static com.example.utils.HouseConfigConstants.REF_DIVISION_TYPE;
 import static com.example.utils.HouseConfigConstants.REF_FLOOR;
 import static com.example.utils.HouseConfigConstants.REF_SERVICE;
+import static com.example.utils.HouseConfigConstants.REF_VALUE_TYPE;
 import static com.example.utils.HouseConfigConstants.SCALAR_VALUE_TYPE;
 import static com.example.utils.HouseConfigConstants.SCALAR_VALUE_TYPE_LIST;
 import static com.example.utils.HouseConfigConstants.SERVICE;
@@ -66,6 +76,7 @@ import static com.example.utils.HouseConfigConstants.USER;
 import static com.example.utils.HouseConfigConstants.USER_BLOCKED;
 import static com.example.utils.HouseConfigConstants.USER_LIST;
 import static com.example.utils.HouseConfigConstants.VALUE;
+import static com.example.utils.HouseConfigConstants.VALUE_TYPE;
 
 /**
  * Created by isabelcosta on 18/03/2017.
@@ -145,6 +156,7 @@ public class DomoBusConfigLoader {
         parseDivisionsType(classElement);
         parseUsersList(classElement);
         parseDevicesList(classElement);
+        parseDeviceTypeList(classElement);
         parseServicesList(classElement);
         parseEnumValueTypeList(classElement);
         parseScalarValueTypeList(classElement);
@@ -373,7 +385,50 @@ public class DomoBusConfigLoader {
         // FIXME: 11-May-17 create value conversion
         return null;
     }
-    
+
+    private void parseDeviceTypeList(Element classElement){
+        List<Node> deviceTypeListXML = classElement.selectNodes(
+                DEVICE_TYPE_LIST + "/" + DEVICE_TYPE);
+        List<DeviceType> deviceTypeList = new ArrayList<>();
+
+        for (Node node : deviceTypeListXML) {
+
+            List<Node> propertyListXML = node.selectNodes(DEVICE_TYPE_LIST
+                    + "/" + DEVICE_TYPE
+                    + "/" + PROPERTY_LIST
+                    + "/" + PROPERTY
+            );
+
+            DeviceType dt = new DeviceType(
+                    node.valueOf(getAttribute(ID)),
+                    node.valueOf(getAttribute(NAME)),
+                    node.valueOf(getAttribute(DESCRIPTION)),
+                    node.valueOf(getAttribute(REF_DEVICE_CLASS)),
+                    parseInnerPropertyList(propertyListXML)
+            );
+            deviceTypeList.add(dt);
+        }
+
+        _homeConfig.setDeviceTypeList(deviceTypeList);
+    }
+
+    private List<Property> parseInnerPropertyList(List<Node> propertyNodes){
+
+        List<Property> propertyList = new ArrayList<>();
+
+        for (Node node : propertyNodes) {
+            Property p = new Property(
+                    node.valueOf(getAttribute(ID)),
+                    node.valueOf(getAttribute(NAME)),
+                    node.valueOf(getAttribute(ACCESS_MODE)),
+                    node.valueOf(getAttribute(VALUE_TYPE)),
+                    node.valueOf(getAttribute(REF_VALUE_TYPE))
+            );
+            propertyList.add(p);
+        }
+        return propertyList;
+    }
+
     private void testingParser(Element classElement){
 
         List<Node> nodes = classElement.selectNodes(DEVICE_CLASS_LIST + "/" + DEVICE_CLASS);

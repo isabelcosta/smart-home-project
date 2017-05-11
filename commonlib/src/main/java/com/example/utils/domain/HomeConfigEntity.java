@@ -12,6 +12,7 @@ public class HomeConfigEntity {
     private static HomeConfigEntity _instance;
 
     private List<Device> _deviceList;
+    private List<DeviceType> _deviceTypeList;
     private List<Service> _serviceList;
     private House _house;
     private List<Floor> _floorList;
@@ -100,6 +101,13 @@ public class HomeConfigEntity {
         this._house = house;
     }
 
+    public List<DeviceType> getDeviceTypeList() {
+        return _deviceTypeList;
+    }
+
+    public void setDeviceTypeList(List<DeviceType> deviceTypeList) {
+        _deviceTypeList = deviceTypeList;
+    }
 
     /**
      * Get Object By IDs

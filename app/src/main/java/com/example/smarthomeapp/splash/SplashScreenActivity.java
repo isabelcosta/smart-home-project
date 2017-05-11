@@ -134,7 +134,7 @@ public class SplashScreenActivity extends BaseActivity implements SplashScreenCo
     private User getUserFromConfiguration(HomeConfigEntity homeConfiguration){
 
         String userId = SharedPreferencesUtils.getStringPreference(getBaseContext(), Constants.Login.USER_ID);
-        return SmartHomeApplication.getInstance().getHomeConfiguration().getUserByID(userId);
+        return homeConfiguration.getUserByID(userId);
     }
 
     private boolean isRememberMe(){

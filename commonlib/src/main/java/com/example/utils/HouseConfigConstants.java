@@ -93,6 +93,12 @@ public class HouseConfigConstants {
     public static final String DEVICE_CLASS = "DeviceClass";
     public static final String DEVICE_CLASS_LIST = "DeviceClassList";
 
+    public static final String DESCRIPTION = "Description";
+    public static final String REF_DEVICE_CLASS = "RefDeviceClass";
+    public static final String ACCESS_MODE = "AccessMode";
+    public static final String VALUE_TYPE = "ValueType";
+    public static final String REF_VALUE_TYPE = "RefValueType";
+
 
     /**
      * Value Conversion
