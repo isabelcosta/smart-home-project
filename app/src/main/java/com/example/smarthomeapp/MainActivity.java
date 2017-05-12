@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.smarthomeapp.divisions.DivisionsFragment;
+import com.example.smarthomeapp.events.EventsFragment;
 import com.example.smarthomeapp.settings.SettingsFragment;
 import com.example.smarthomeapp.util.ActivityUtils;
 
@@ -59,7 +60,7 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
         overviewMenuOptionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_overview);
+//                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_overview);
             }
         });
 
@@ -73,13 +74,13 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
         eventsMenuOptionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_events);
+                replaceFragment(EventsFragment.newInstance(), R.string.menu_events);
             }
         });
         controlMenuOptionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_control);
+//                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_control);
             }
         });
 
@@ -99,6 +100,18 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
         }
         if (fragmentToReplace != null) {
             ActivityUtils.replaceFragmentToActivity(getSupportFragmentManager(), fragmentToReplace, R.id.content_frame);
+        }
+    }
+
+    public void addFragment(BaseFragment fragmentToReplace, int titleResId){
+
+        ActionBar actionBar = getSupportActionBar();
+
+        if(actionBar != null) {
+            actionBar.setTitle(titleResId);
+        }
+        if (fragmentToReplace != null) {
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragmentToReplace, R.id.content_frame);
         }
     }
 

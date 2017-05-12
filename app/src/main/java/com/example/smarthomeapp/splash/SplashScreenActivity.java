@@ -27,7 +27,7 @@ import butterknife.BindView;
 public class SplashScreenActivity extends BaseActivity implements SplashScreenContract.View{
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
+    private final int SPLASH_DISPLAY_LENGTH = 1000;
     private LoadXMLAsyncTask mLoadHouseTask = null;
     private SplashScreenContract.Presenter mSplashPresenter;
 
@@ -134,14 +134,7 @@ public class SplashScreenActivity extends BaseActivity implements SplashScreenCo
     private User getUserFromConfiguration(HomeConfigEntity homeConfiguration){
 
         String userId = SharedPreferencesUtils.getStringPreference(getBaseContext(), Constants.Login.USER_ID);
-        List<User> users = homeConfiguration.getUserList();
-
-        for (User user : users) {
-            if (user.getId().equals(userId)){
-                return user;
-            }
-        }
-        return null;
+        return homeConfiguration.getUserByID(userId);
     }
 
     private boolean isRememberMe(){

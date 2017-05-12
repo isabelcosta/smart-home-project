@@ -8,18 +8,18 @@ public class Service {
     /**
      * Attributes
      */
-    private int id;
+    private String id;
     private String name;
 
     /**
      * Constructor
      */
-    public Service(int id, String name) {
+    public Service(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -27,7 +27,7 @@ public class Service {
         return name;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

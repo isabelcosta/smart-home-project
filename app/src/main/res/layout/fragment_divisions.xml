@@ -4,44 +4,71 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/divisions_loader_view"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/loader"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textSize="@dimen/no_division_text_size"
+            android:text="@string/loading_devices"/>
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/no_divisions_view">
+        android:id="@+id/divisions_container_view">
 
-        <ImageView
-            android:id="@+id/no_divisions_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_warning" />
-
-        <TextView
-            android:id="@+id/no_divisions_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_below="@+id/no_divisions_icon"
-            android:textSize="@dimen/no_division_text_size"
-            android:text="@string/no_divisions_all" />
-    </RelativeLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/divisions_view"
-        tools:context="com.example.smarthomeapp.divisions.DivisionsFragment">
-
-        <GridView
-            android:id="@+id/divisions_grid_view"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:numColumns="3"
-            android:verticalSpacing="10dp"
-            android:horizontalSpacing="30dp"
-            android:layout_margin="@dimen/division_grid_margin"
-            android:stretchMode="columnWidth"/>
+            android:id="@+id/no_divisions_view">
 
-    </FrameLayout>
+            <ImageView
+                android:id="@+id/no_divisions_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_warning" />
+
+            <TextView
+                android:id="@+id/no_divisions_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/no_divisions_icon"
+                android:textSize="@dimen/no_division_text_size"
+                android:text="@string/no_divisions_all" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/divisions_view"
+            tools:context="com.example.smarthomeapp.divisions.DivisionsFragment">
+
+            <GridView
+                android:id="@+id/divisions_grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:numColumns="3"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="30dp"
+                android:layout_margin="@dimen/division_grid_margin"
+                android:stretchMode="columnWidth"/>
+
+        </FrameLayout>
+    </RelativeLayout>
 </RelativeLayout>

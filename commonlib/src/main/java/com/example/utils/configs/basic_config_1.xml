@@ -193,13 +193,13 @@
     <!--  This can be used to store a system state, typically in a
       simulated environment; in an actual system, current state is retrieved
       directly from the devices -->
-    <!-- the attribute InvalidValue is optional; if not present, it is equivalent to
-      having InvalidValue="FALSE". If InvalidValue="TRUE" this means the property's
+    <!-- the attribute InvalIDValue is optional; if not present, it is equivalent to
+      having InvalIDValue="FALSE". If InvalIDValue="TRUE" this means the property's
       value is unknown or there is a problem with the device and the property's value
       should be ignored -->
 
     <DeviceStateList>
-        <DeviceState RefDevice="#" RefProperty="#" Value="x" InvalidValue="#" />
+        <DeviceState RefDevice="#" RefProperty="#" Value="x" InvalIDValue="#" />
     </DeviceStateList>
 
 

@@ -4,6 +4,7 @@ dependencies {
     compile 'org.dom4j:dom4j:2.0.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    compile 'com.artemzin.assert-parcelable:assert-parcelable:1.0.1'
 }
 
 sourceCompatibility = "1.7"

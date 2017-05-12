@@ -1,5 +1,8 @@
 package com.example.utils.domain;
 
+import com.example.utils.HouseConfigConstants;
+import com.example.utils.Utils;
+
 import java.util.List;
 
 /**
@@ -10,13 +13,13 @@ public class Device {
     /**
      * Attributes
      */
-    private int id;
-    private int refDeviceType;
+    private String id;
+    private String refDeviceType;
     private String name;
-    private int address;
-    private int refDivision;
-    private List<Integer> accessLevel;
-    private List<Integer> userBlocked;
+    private String address;
+    private String refDivision;
+    private String[] accessLevel;
+    private String[] userBlocked;
 
     /**
      * Elements
@@ -26,13 +29,13 @@ public class Device {
     /**
      * Constructor
      */
-    public Device(int id,
-                  int refDeviceType,
+    public Device(String id,
+                  String refDeviceType,
                   String name,
-                  int address,
-                  int refDivision,
-                  List<Integer> accessLevel,
-                  List<Integer> userBlocked,
+                  String address,
+                  String refDivision,
+                  String accessLevel,
+                  String userBlocked,
                   List<DeviceService> deviceServiceList) {
 
         this.id = id;
@@ -40,24 +43,24 @@ public class Device {
         this.name = name;
         this.address = address;
         this.refDivision = refDivision;
-        this.accessLevel = accessLevel;
-        this.userBlocked = userBlocked;
+        this.accessLevel = Utils.stripStringIntoV(accessLevel, HouseConfigConstants.DOMO_VALUE_SEPARATOR);
+        this.userBlocked = Utils.stripStringIntoV(userBlocked, HouseConfigConstants.DOMO_VALUE_SEPARATOR);
         this.deviceServiceList = deviceServiceList;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getRefDeviceType() {
+    public String getRefDeviceType() {
         return refDeviceType;
     }
 
-    public void setRefDeviceType(int refDeviceType) {
+    public void setRefDeviceType(String refDeviceType) {
         this.refDeviceType = refDeviceType;
     }
 
@@ -69,35 +72,35 @@ public class Device {
         this.name = name;
     }
 
-    public int getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(int address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public int getRefDivision() {
+    public String getRefDivision() {
         return refDivision;
     }
 
-    public void setRefDivision(int refDivision) {
+    public void setRefDivision(String refDivision) {
         this.refDivision = refDivision;
     }
 
-    public List<Integer> getAccessLevel() {
+    public String[] getAccessLevel() {
         return accessLevel;
     }
 
-    public void setAccessLevel(List<Integer> accessLevel) {
+    public void setAccessLevel(String[] accessLevel) {
         this.accessLevel = accessLevel;
     }
 
-    public List<Integer> getUserBlocked() {
+    public String[] getUserBlocked() {
         return userBlocked;
     }
 
-    public void setUserBlocked(List<Integer> userBlocked) {
+    public void setUserBlocked(String[] userBlocked) {
         this.userBlocked = userBlocked;
     }
 

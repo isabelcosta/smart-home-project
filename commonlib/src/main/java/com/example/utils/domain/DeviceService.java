@@ -8,20 +8,20 @@ public class DeviceService {
     /**
      * Attributes
      */
-    private int refService;
+    private String refService;
 
     /**
      * Constructor
      */
-    public DeviceService(int refService) {
+    public DeviceService(String refService) {
         this.refService = refService;
     }
 
-    public int getRefService() {
+    public String getRefService() {
         return refService;
     }
 
-    public void setRefService(int refService) {
+    public void setRefService(String refService) {
         this.refService = refService;
     }
 }

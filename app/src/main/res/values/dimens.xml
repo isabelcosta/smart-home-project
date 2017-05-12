@@ -16,7 +16,6 @@
     <dimen name="credentials_margin">30dp</dimen>
 
 
-
     <!-- Bottom Menu Navigation -->
 
     <dimen name="menu_icon_size">50dp</dimen>
@@ -30,6 +29,7 @@
     <dimen name="division_grid_margin">20dp</dimen>
     <dimen name="no_division_icon_size">350dp</dimen>
     <dimen name="no_division_text_size">32sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 
 </resources>

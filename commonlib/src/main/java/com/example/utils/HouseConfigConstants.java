@@ -68,6 +68,7 @@ public class HouseConfigConstants {
     public static final String REF_DIVISION_TYPE = "RefDivisionType";
     public static final String REF_USER = "RefUser";
     public static final String REF_PROPERTY = "RefProperty";
+    public static final String REF_SERVICE = "RefService";
 
     public static final String VALUE = "Value";
     public static final String INVALID_VALUE = "InvalidValue";
@@ -91,6 +92,12 @@ public class HouseConfigConstants {
 
     public static final String DEVICE_CLASS = "DeviceClass";
     public static final String DEVICE_CLASS_LIST = "DeviceClassList";
+
+    public static final String DESCRIPTION = "Description";
+    public static final String REF_DEVICE_CLASS = "RefDeviceClass";
+    public static final String ACCESS_MODE = "AccessMode";
+    public static final String VALUE_TYPE = "ValueType";
+    public static final String REF_VALUE_TYPE = "RefValueType";
 
 
     /**
@@ -128,5 +135,19 @@ public class HouseConfigConstants {
     public static final String MIN_VALUE = "MinValue";
     public static final String UNITS = "Units";
     public static final String STEP = "Step";
+
+    public static final String ENUM = "ENUM";
+    public static final String SCALAR = "SCALAR";
+    public static final String ARRAY = "ARRAY";
+
+    public static final String READ_AND_WRITE = "RW";
+    public static final String READ_ONLY = "RO";
+    public static final String WRITE_ONLY = "WO";
+
+
+    /**
+     * Other
+     */
+    public static final String DOMO_VALUE_SEPARATOR = ","; // basically COMMA
 
 }

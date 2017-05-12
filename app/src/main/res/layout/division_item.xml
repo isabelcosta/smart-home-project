@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:gravity="center"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/division_card_view"
     android:paddingTop="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_horizontal_margin"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <ImageView
-        android:layout_width="@dimen/division_item_icon_size"
-        android:layout_height="@dimen/division_item_icon_size"
-        android:id="@+id/division_image"
-        tools:src="@drawable/ic_android"
-        android:layout_marginBottom="20dp"/>
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/division_text"
-        tools:text="Bedroom"
-        android:textAlignment="center"
-        android:textSize="@dimen/division_item_text_size"/>
-</LinearLayout>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/division_item_icon_size"
+            android:layout_height="@dimen/division_item_icon_size"
+            android:id="@+id/division_image"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_android"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/division_text"
+            tools:text="Bedroom"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="@dimen/division_item_text_size"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
