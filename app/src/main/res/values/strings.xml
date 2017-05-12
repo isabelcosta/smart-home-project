@@ -35,8 +35,14 @@
 
     <string name="no_divisions_all">This house has no divisions!!!</string>
 
+    <!-- Events Screen -->
+    <string name="device_event">Device %1$s changed property %2$s to value %3$s.</string>
+    <string name="user_event">User %1$s changed property %2$s from device %3$s to value %4$s.</string>
+
+
 
     <!-- Settings Screen -->
     <string name="log_out">Log out</string>
+    <string name="loading_devices">Loading devices ...</string>
 
 </resources>

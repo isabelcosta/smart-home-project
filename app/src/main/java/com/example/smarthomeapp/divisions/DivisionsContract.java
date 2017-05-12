@@ -19,7 +19,7 @@ public interface DivisionsContract {
 
         void showDivisions(List<Division> tasks);
 
-        void showDivisionDevicesUi(List<DeviceStateResponse> devices);
+        void showDivisionDevicesUi(String divisionId, List<DeviceStateResponse> devices);
 
         void showNoDivisions();
 

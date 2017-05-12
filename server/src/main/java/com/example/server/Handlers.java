@@ -68,7 +68,7 @@ public class Handlers {
 			}
 
 			// See Response
-			System.out.println(jsonString);
+			printRequest(requestMethod, path, jsonString);
 
 			// Send response
 			String response = jsonString;
@@ -119,7 +119,7 @@ public class Handlers {
 			}
 
 			// See Response
-			System.out.println(jsonString);
+			printRequest(requestMethod, path, jsonString);
 
 			// Send response
 			String response = jsonString;
@@ -273,5 +273,10 @@ public class Handlers {
 				}
 			}
 		}
+	}
+
+	public static void printRequest(String reqMethod, String path, String json){
+		System.out.println("Request: " + reqMethod + " " + path);
+		System.out.println("Response: " + json);
 	}
 }

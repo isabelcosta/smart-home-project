@@ -6,6 +6,8 @@ import com.example.smarthomeapp.divisions.data.DivisionsDataSource;
 import com.example.smarthomeapp.divisions.data.DivisionsRepository;
 import com.example.utils.domain.Device;
 
+import java.util.Map;
+
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
@@ -45,7 +47,7 @@ public class DevicesRepository implements DevicesDataSource{
     }
 
     @Override
-    public void updateDeviceValue(@NonNull Device device, @NonNull UpdateDeviceValueCallback callback) {
+    public void updateDeviceValue(@NonNull Map<String,String> devicesValues, @NonNull UpdateDeviceValueCallback callback) {
 
     }
 }

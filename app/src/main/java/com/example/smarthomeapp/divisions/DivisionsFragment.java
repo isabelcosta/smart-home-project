@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.smarthomeapp.MainActivity;
@@ -54,6 +55,12 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
 
     @BindView(R.id.no_divisions_view)
     View mNoDivisionsView;
+
+    @BindView(R.id.divisions_loader_view)
+    View mLoader;
+
+    @BindView(R.id.divisions_container_view)
+    View mContainerView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -144,7 +151,8 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
 
     @Override
     public void setLoadingIndicator(boolean active) {
-
+        mLoader.setVisibility(active ? View.VISIBLE : View.GONE);
+        mContainerView.setVisibility(!active ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -157,8 +165,8 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
     }
 
     @Override
-    public void showDivisionDevicesUi(List<DeviceStateResponse> devices) {
-        ((MainActivity) getActivity()).addFragment(DevicesFragment.newInstance(devices), R.string.header_devices);
+    public void showDivisionDevicesUi(String divisionId, List<DeviceStateResponse> devices) {
+        ((MainActivity) getActivity()).replaceFragment(DevicesFragment.newInstance(divisionId, devices), R.string.header_devices);
     }
 
     @Override

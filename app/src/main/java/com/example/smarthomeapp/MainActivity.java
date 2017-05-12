@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.smarthomeapp.divisions.DivisionsFragment;
+import com.example.smarthomeapp.events.EventsFragment;
 import com.example.smarthomeapp.settings.SettingsFragment;
 import com.example.smarthomeapp.util.ActivityUtils;
 
@@ -73,7 +74,7 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
         eventsMenuOptionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_events);
+                replaceFragment(EventsFragment.newInstance(), R.string.menu_events);
             }
         });
         controlMenuOptionView.setOnClickListener(new View.OnClickListener() {

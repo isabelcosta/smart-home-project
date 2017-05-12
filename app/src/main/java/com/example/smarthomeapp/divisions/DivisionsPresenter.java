@@ -43,7 +43,7 @@ public class DivisionsPresenter implements DivisionsContract.Presenter {
 
         mDivisionsView.setLoadingIndicator(true);
 
-        String divisionId = mDivisionsList.get(divisionPosition).getId();
+        final String divisionId = mDivisionsList.get(divisionPosition).getId();
 
         mDivisionsRepository.getDevices(divisionId, new DivisionsDataSource.LoadDevicesCallback() {
             @Override
@@ -53,7 +53,7 @@ public class DivisionsPresenter implements DivisionsContract.Presenter {
                     return;
                 }
                 mDivisionsView.setLoadingIndicator(false);
-                mDivisionsView.showDivisionDevicesUi(devices);
+                mDivisionsView.showDivisionDevicesUi(divisionId, devices);
             }
 
             @Override
@@ -61,7 +61,7 @@ public class DivisionsPresenter implements DivisionsContract.Presenter {
                 mDivisionsView.setLoadingIndicator(false);
 
                 // Send empty list
-                mDivisionsView.showDivisionDevicesUi(new ArrayList<DeviceStateResponse>());
+                mDivisionsView.showDivisionDevicesUi(divisionId, new ArrayList<DeviceStateResponse>());
             }
         });
     }

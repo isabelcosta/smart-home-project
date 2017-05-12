@@ -8,6 +8,8 @@ import com.example.smarthomeapp.util.Constants;
 import com.example.smarthomeapp.util.RemoteUtils;
 import com.example.utils.domain.Device;
 
+import java.util.Map;
+
 import retrofit2.Retrofit;
 
 /**
@@ -39,8 +41,24 @@ public class DevicesRemoteDataSource implements DevicesDataSource {
     }
 
     @Override
-    public void updateDeviceValue(@NonNull Device device, @NonNull UpdateDeviceValueCallback callback) {
-
+    public void updateDeviceValue(@NonNull Map<String, String> devicesValues, @NonNull UpdateDeviceValueCallback callback) {
+//        // Fetch a list of the division devices repositories.
+//        Call<List<DeviceStateResponse>> devicesCall = _service.getDevices(divisionId);
+//
+//        // Execute the call asynchronously. Get a positive or negative callback.
+//        devicesCall.enqueue(new Callback<List<DeviceStateResponse>>() {
+//            @Override
+//            public void onResponse(Call<List<DeviceStateResponse>> call, Response<List<DeviceStateResponse>> response) {
+//                // The network call was a success and we got a response
+//                List<DeviceStateResponse> devices = response.body();
+//                callback.onDevicesLoaded(devices);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<DeviceStateResponse>> call, Throwable t) {
+//                // the network call was a failure
+//                callback.onDataNotAvailable();
+//            }
+//        });
     }
-
 }
