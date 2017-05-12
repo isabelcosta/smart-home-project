@@ -3,23 +3,18 @@ package com.example.server;
 import com.example.utils.ServerConstants;
 import com.example.utils.Utils;
 import com.example.utils.domain.Device;
-import com.example.utils.httpentities.DeviceStateResponse;
-import com.example.utils.httpentities.DevicesResponse;
+import com.example.server.httpentities.DeviceStateResponse;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.*;
-
-import static com.example.server.HouseControlServer.getHomeConfigurationEntity;
 
 /**
  * Inspired by Source code from Andy Feng

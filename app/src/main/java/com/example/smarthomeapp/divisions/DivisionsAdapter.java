@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.smarthomeapp.BasePresenter;
 import com.example.smarthomeapp.R;
 import com.example.smarthomeapp.util.IconUtils;
 import com.example.utils.domain.Division;
@@ -26,7 +27,7 @@ public class DivisionsAdapter extends BaseAdapter{
     private List<Division> mDivisionsList;
     private Context mContext;
 
-    public DivisionsAdapter(Context context, List<Division> divisionsList){
+    public DivisionsAdapter(Context context, BasePresenter mPresenter, List<Division> divisionsList){
         this.mDivisionsList = divisionsList;
         this.mContext = context;
     }

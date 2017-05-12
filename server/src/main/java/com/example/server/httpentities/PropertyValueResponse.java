@@ -1,4 +1,4 @@
-package com.example.utils.httpentities;
+package com.example.server.httpentities;
 
 /**
  * Created by isabelcosta on 11-May-17.

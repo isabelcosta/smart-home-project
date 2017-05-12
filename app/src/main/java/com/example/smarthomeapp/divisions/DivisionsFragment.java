@@ -12,9 +12,14 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.smarthomeapp.MainActivity;
 import com.example.smarthomeapp.R;
 import com.example.smarthomeapp.BaseFragment;
+import com.example.smarthomeapp.devices.DevicesFragment;
+import com.example.smarthomeapp.util.ActivityUtils;
+import com.example.smarthomeapp.util.Injection;
 import com.example.utils.domain.Division;
+import com.example.smarthomeapp.httpentities.DeviceStateResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,10 +79,9 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
         super.onCreate(savedInstanceState);
 
         // Create the presenter
-        mDivisionsPresenter = new DivisionsPresenter(this);
+        mDivisionsPresenter = new DivisionsPresenter(Injection.provideDivisionsRepository(getContext()), this);
 
-        mDivisionsAdapter = new DivisionsAdapter(getContext(), new ArrayList<Division>(0));
-
+        mDivisionsAdapter = new DivisionsAdapter(getContext(), mDivisionsPresenter, new ArrayList<Division>(0));
     }
 
     @Override
@@ -100,6 +104,7 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
         divisionsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
+                mDivisionsPresenter.openDevicesList(position);
                 Toast.makeText(getContext(), "Room", Toast.LENGTH_LONG).show();
 
             }
@@ -152,8 +157,8 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
     }
 
     @Override
-    public void showDivisionDevicesUi(String divisionId) {
-//        replaceFragment(DivisionsFragment.newInstance(), R.string.menu_events);
+    public void showDivisionDevicesUi(List<DeviceStateResponse> devices) {
+        ((MainActivity) getActivity()).addFragment(DevicesFragment.newInstance(devices), R.string.header_devices);
     }
 
     @Override

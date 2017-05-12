@@ -102,6 +102,18 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
         }
     }
 
+    public void addFragment(BaseFragment fragmentToReplace, int titleResId){
+
+        ActionBar actionBar = getSupportActionBar();
+
+        if(actionBar != null) {
+            actionBar.setTitle(titleResId);
+        }
+        if (fragmentToReplace != null) {
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragmentToReplace, R.id.content_frame);
+        }
+    }
+
     @Override
     public void onFragmentInteraction(Uri uri) {
 

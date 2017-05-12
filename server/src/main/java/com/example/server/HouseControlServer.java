@@ -3,10 +3,9 @@ package com.example.server;
 
 import com.example.utils.DomoBusConfigLoader;
 import com.example.utils.domain.HomeConfigEntity;
-import com.example.utils.httpentities.DeviceStateResponse;
-import com.example.utils.httpentities.DevicesResponse;
-import com.example.utils.httpentities.PropertyValueResponse;
-import com.google.gson.Gson;
+import com.example.server.httpentities.DeviceStateResponse;
+import com.example.server.httpentities.DevicesResponse;
+import com.example.server.httpentities.PropertyValueResponse;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -69,7 +68,7 @@ public class HouseControlServer {
 
 		devicesValues.put("1", d);
 		devicesValues.put("2", d2);
-		devicesValues.put("1", d3);
+		devicesValues.put("3", d3);
 	}
 
 	// Getters and Setters

@@ -1,6 +1,4 @@
-package com.example.utils.httpentities;
-
-import com.example.utils.domain.HomeConfigEntity;
+package com.example.smarthomeapp.httpentities;
 
 import java.util.List;
 

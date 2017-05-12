@@ -30,11 +30,12 @@ dependencies {
     // To bind ui views
     // Type-safe HTTP client for web requests
     compile project(':commonlib')
+    //    compile 'com.google.code.gson:gson:2.7'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.2.0'
     compile 'com.android.support:support-v4:25.2.0'
-    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.jakewharton:butterknife:8.5.1'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     testCompile 'junit:junit:4.12'

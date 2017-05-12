@@ -1,10 +1,9 @@
 package com.example.smarthomeapp.divisions;
 
-import android.support.annotation.NonNull;
-
 import com.example.smarthomeapp.BasePresenter;
 import com.example.smarthomeapp.BaseView;
 import com.example.utils.domain.Division;
+import com.example.smarthomeapp.httpentities.DeviceStateResponse;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public interface DivisionsContract {
 
         void showDivisions(List<Division> tasks);
 
-        void showDivisionDevicesUi(String divisionId);
+        void showDivisionDevicesUi(List<DeviceStateResponse> devices);
 
         void showNoDivisions();
 
@@ -31,6 +30,8 @@ public interface DivisionsContract {
     interface Presenter extends BasePresenter {
 
         void result(int requestCode, int resultCode);
+
+        void openDevicesList(int divisionPosition);
 
         void loadDivisions();
 

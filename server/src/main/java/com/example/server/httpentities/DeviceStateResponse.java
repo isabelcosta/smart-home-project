@@ -1,4 +1,4 @@
-package com.example.utils.httpentities;
+package com.example.server.httpentities;
 
 import java.util.List;
 
