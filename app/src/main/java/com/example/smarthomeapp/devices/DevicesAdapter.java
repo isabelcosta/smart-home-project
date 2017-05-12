@@ -77,10 +77,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
     public void replaceData(Map<String, Device> devices, Map<String, DeviceStateResponse> devicesState) {
         setDevicesStateList(devices, devicesState);
-//        this.notifyDataSetChanged();
-        for (int i = 0; i < mDevicesStateMap.size(); i++){
-            notifyItemChanged(i);
-        }
+        this.notifyDataSetChanged();
     }
 
     private void setDevicesStateList(Map<String, Device> devices, Map<String, DeviceStateResponse> devicesState) {

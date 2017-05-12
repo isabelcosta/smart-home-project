@@ -27,7 +27,7 @@ import butterknife.BindView;
 public class SplashScreenActivity extends BaseActivity implements SplashScreenContract.View{
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
+    private final int SPLASH_DISPLAY_LENGTH = 1000;
     private LoadXMLAsyncTask mLoadHouseTask = null;
     private SplashScreenContract.Presenter mSplashPresenter;
 

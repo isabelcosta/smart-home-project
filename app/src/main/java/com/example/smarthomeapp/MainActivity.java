@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
         overviewMenuOptionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_overview);
+//                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_overview);
             }
         });
 
@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
         controlMenuOptionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_control);
+//                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_control);
             }
         });
 
