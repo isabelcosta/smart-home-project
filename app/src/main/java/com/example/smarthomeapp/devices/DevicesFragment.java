@@ -4,6 +4,7 @@ package com.example.smarthomeapp.devices;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,6 +109,7 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
         View view = inflater.inflate(R.layout.fragment_devices, container, false);
         ButterKnife.bind(this, view);
 
+        mDevicesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // Set the adapter
         mDevicesRecyclerView.setAdapter(mAdapter);
         return view;
