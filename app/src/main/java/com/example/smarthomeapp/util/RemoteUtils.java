@@ -12,8 +12,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RemoteUtils {
 
+
+    public static String SERVER_IP_ADDRESS = "192.168.1.33";
+
     // Change IP Address
-    public static String API_BASE_URL = "http://192.168.1.36:9000/";
+    public static String API_BASE_URL = "http://" + SERVER_IP_ADDRESS + ":9000/";
 
     public static Retrofit getRetrofitObj(){
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
