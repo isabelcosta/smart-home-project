@@ -9,15 +9,15 @@ import java.util.List;
 public class EnumValueType {
 
     private String name;
-    private String ID;
+    private String enumId;
     private List<Enumerated> enumerated;
 
     /**
      * Constructor
      */
-    public EnumValueType(String name, String ID, List<Enumerated> enumerated) {
+    public EnumValueType(String name, String enumId, List<Enumerated> enumerated) {
         this.name = name;
-        this.ID = ID;
+        this.enumId = enumId;
         this.enumerated = enumerated;
     }
 
@@ -29,12 +29,12 @@ public class EnumValueType {
         this.name = Name;
     }
 
-    public String getID () {
-        return ID;
+    public String getEnumId () {
+        return enumId;
     }
 
-    public void setID (String ID) {
-        this.ID = ID;
+    public void setEnumId (String enumId) {
+        this.enumId = enumId;
     }
 
     public List<Enumerated> getEnumerated () {
@@ -47,7 +47,7 @@ public class EnumValueType {
 
     @Override
     public String toString() {
-        return "EnumValueType [name = " + name + ", ID = " + ID
+        return "EnumValueType [name = " + name + ", ID = " + enumId
                 + ", enumerated = " + enumerated + "]";
     }
 }

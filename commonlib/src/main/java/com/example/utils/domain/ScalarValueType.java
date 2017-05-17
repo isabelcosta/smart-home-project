@@ -11,17 +11,17 @@ public class ScalarValueType {
     private String minValue;
     private String numBits;
     private String units;
-    private String id;
+    private String scalarId;
     private ValueConversion valueConversion;
     private String maxValue;
 
-    public ScalarValueType(String name, String step, String minValue, String numBits, String units, String id, ValueConversion valueConversion, String maxValue) {
+    public ScalarValueType(String name, String step, String minValue, String numBits, String units, String scalarId, ValueConversion valueConversion, String maxValue) {
         this.name = name;
         this.step = step;
         this.minValue = minValue;
         this.numBits = numBits;
         this.units = units;
-        this.id = id;
+        this.scalarId = scalarId;
         this.valueConversion = valueConversion;
         this.maxValue = maxValue;
     }
@@ -66,12 +66,12 @@ public class ScalarValueType {
         this.units = Units;
     }
 
-    public String getId() {
-        return id;
+    public String getScalarId() {
+        return scalarId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setScalarId(String id) {
+        this.scalarId = id;
     }
 
     public ValueConversion getValueConversion() {
@@ -95,7 +95,7 @@ public class ScalarValueType {
     {
         return "ScalarValueType [name = " + name + ", step = " + step
                 + ", minValue = " + minValue + ", numBits = " + numBits
-                + ", units = " + units + ", id = " + id
+                + ", units = " + units + ", id = " + scalarId
                 + ", valueConversion = " + valueConversion + ", maxValue = " + maxValue + "]";
     }
 }

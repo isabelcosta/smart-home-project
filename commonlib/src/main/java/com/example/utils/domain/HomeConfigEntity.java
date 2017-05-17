@@ -149,4 +149,45 @@ public class HomeConfigEntity {
         }
         return devicesList;
     }
+
+    public DeviceType getDeviceTypeByID(String deviceTypeID){
+        for(DeviceType deviceType : _deviceTypeList){
+            if(deviceType.getId().equals(deviceTypeID)){
+                return deviceType;
+            }
+        }
+        return null;
+    }
+
+    public List<Property> getPropertyListByDeviceTypeID(String deviceTypeID){
+        return getDeviceTypeByID(deviceTypeID).getPropertyList();
+    }
+
+    public Property getPropertyFromDeviceTypeByID(String deviceTypeID, String propertyID) {
+        List<Property> properties = getDeviceTypeByID(deviceTypeID).getPropertyList();
+        for(Property property : properties){
+            if(property.getId().equals(propertyID)){
+                return property;
+            }
+        }
+        return null;
+    }
+
+    public ScalarValueType getScalarByID(String scalarID){
+        for(ScalarValueType scalarType : _scalarValueList){
+            if(scalarType.getScalarId().equals(scalarID)){
+                return scalarType;
+            }
+        }
+        return null;
+    }
+
+    public EnumValueType getEnumByID(String enumID){
+        for(EnumValueType enumType : _enumValueList){
+            if(enumType.getEnumId().equals(enumID)){
+                return enumType;
+            }
+        }
+        return null;
+    }
 }
