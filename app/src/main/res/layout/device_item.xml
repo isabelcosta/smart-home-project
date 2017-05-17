@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/device_icon"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_bed"
-        tools:layout_editor_absoluteY="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/save_value_button"
-        android:layout_marginRight="648dp" />
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_marginBottom="20dp">
 
-    <TextView
-        android:id="@+id/device_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="89dp"
-        android:layout_marginTop="31dp"
-        app:layout_constraintTop_toBottomOf="@+id/device_icon" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/device_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_bed"
+                android:layout_centerInParent="true"/>
 
-    <ListView
-        android:layout_width="573dp"
-        android:layout_height="149dp"
-        android:id="@+id/property_list"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="16dp" />
+            <TextView
+                android:id="@+id/device_name"
+                android:layout_below="@+id/device_icon"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="@dimen/device_text_size"
+                android:layout_marginTop="30dp"/>
 
-    <Button
-        android:id="@+id/save_value_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        tools:layout_editor_absoluteX="833dp"
-        tools:layout_editor_absoluteY="68dp" />
-</android.support.constraint.ConstraintLayout>
+        </RelativeLayout>
+
+        <ListView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/property_list"
+            android:layout_weight="2"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/save_value_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Save"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <include layout="@layout/divider"/>
+
+</RelativeLayout>

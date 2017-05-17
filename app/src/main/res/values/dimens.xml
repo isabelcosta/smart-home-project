@@ -31,5 +31,8 @@
     <dimen name="no_division_text_size">32sp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <!-- Device Fragment -->
+
+    <dimen name="device_text_size">16sp</dimen>
 
 </resources>

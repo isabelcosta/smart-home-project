@@ -21,6 +21,7 @@ import com.example.utils.domain.Division;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -90,8 +91,8 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
         mAdapter = new DevicesAdapter(
                 getContext(),
                 mPresenter,
-                new HashMap<String, Device>(0),
-                new HashMap<String, DeviceStateResponse>(0)
+                new LinkedList<Device>(),
+                new LinkedList<DeviceStateResponse>()
         );
     }
 
@@ -127,7 +128,7 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
     }
 
     @Override
-    public void showDevices(Map<String, Device> devices, Map<String, DeviceStateResponse> deviceStateResponses) {
+    public void showDevices(List<Device> devices, List<DeviceStateResponse> deviceStateResponses) {
         Toast.makeText(getContext(), "HALO  " + deviceStateResponses.size(), Toast.LENGTH_LONG).show();
         mAdapter.replaceData(devices, deviceStateResponses);
     }

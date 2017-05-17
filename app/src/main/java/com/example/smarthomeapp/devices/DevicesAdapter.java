@@ -14,7 +14,7 @@ import com.example.smarthomeapp.R;
 import com.example.smarthomeapp.httpentities.DeviceStateResponse;
 import com.example.utils.domain.Device;
 
-import java.util.Map;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,26 +25,26 @@ import butterknife.ButterKnife;
 
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceViewHolder> {
 
-    private Map<String, Device> mDevicesMap;
-    private Map<String, DeviceStateResponse> mDevicesStateMap;
+    private List<Device> mDevicesList;
+    private List<DeviceStateResponse> mDevicesStateList;
     private DevicesContract.Presenter mPresenter;
     private Context mContext;
 
     public DevicesAdapter(Context context,
                           DevicesContract.Presenter presenter,
-                          Map<String, Device> devicesMap,
-                          Map<String, DeviceStateResponse> devicesStateMap){
+                          List<Device> devicesMap,
+                          List<DeviceStateResponse> devicesStateMap){
         this.mContext = context;
         this.mPresenter = presenter;
-        this.mDevicesMap = devicesMap;
-        this.mDevicesStateMap = devicesStateMap;
+        this.mDevicesList = devicesMap;
+        this.mDevicesStateList = devicesStateMap;
     }
 
     @Override
     public DeviceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.device_item_2, parent, false);
+                .inflate(R.layout.device_item, parent, false);
 
         DeviceViewHolder vh = new DeviceViewHolder(view);
         return vh;
@@ -53,14 +53,19 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
     @Override
     public void onBindViewHolder(DeviceViewHolder holder, int position) {
 
-        String deviceId = String.valueOf(position + 1);
-
-        DeviceStateResponse deviceStateResponse = mDevicesStateMap.get(deviceId);
-        Device device = mDevicesMap.get(deviceId);
+        DeviceStateResponse deviceStateResponse = mDevicesStateList.get(position);
+        Device device = mDevicesList.get(position);
 
 //        holder.deviceIcon.setImageResource(IconUtils.getIconsMap().get(device.getId()));
         holder.deviceName.setText(device.getName());
-//        holder.propertiesList.setAdapter(division.getName());
+
+//        holder.propertiesList.setAdapter(
+//                new DevicePropertiesAdapter(
+//                        mContext,
+//                        device.getRefDeviceType(),
+//                        deviceStateResponse.getValues()
+//                )
+//        );
 
         holder.saveValueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,19 +77,19 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
     @Override
     public int getItemCount() {
-        return mDevicesStateMap.size();
+        return mDevicesStateList.size();
     }
 
-    public void replaceData(Map<String, Device> devices, Map<String, DeviceStateResponse> devicesState) {
+    public void replaceData(List<Device> devices, List<DeviceStateResponse> devicesState) {
         setDevicesStateList(devices, devicesState);
         this.notifyDataSetChanged();
     }
 
-    private void setDevicesStateList(Map<String, Device> devices, Map<String, DeviceStateResponse> devicesState) {
-        mDevicesMap.clear();
-        mDevicesMap.putAll(devices);
-        mDevicesStateMap.clear();
-        mDevicesStateMap.putAll(devicesState);
+    private void setDevicesStateList(List<Device> devices, List<DeviceStateResponse> devicesState) {
+        mDevicesList.clear();
+        mDevicesList.addAll(devices);
+        mDevicesStateList.clear();
+        mDevicesStateList.addAll(devicesState);
     }
 
     public class DeviceViewHolder extends RecyclerView.ViewHolder {

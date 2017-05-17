@@ -19,7 +19,7 @@ public class DevicesContract {
 
         void setLoadingIndicator(boolean active);
 
-        void showDevices(Map<String, Device> devices, Map<String, DeviceStateResponse> devicesState);
+        void showDevices(List<Device> devices, List<DeviceStateResponse> devicesState);
 
         void showNoDevices();
 

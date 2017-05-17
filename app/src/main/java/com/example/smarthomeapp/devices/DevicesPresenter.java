@@ -13,6 +13,8 @@ import com.example.utils.domain.Device;
 import com.example.utils.domain.Division;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,19 +27,19 @@ public class DevicesPresenter implements DevicesContract.Presenter{
     private final DevicesRepository mDevicesRepository;
     private final DevicesContract.View mDevicesView;
 
-    private Map<String,String> mDevicesValuesToSave;
-    private List<Device> mDevicesList;
-    private List<DeviceStateResponse> mDevicesStateResponsesList;
+    private Map<String, String> mDevicesValuesToSave;
 
-    private Map<String, Device> mDevicesMap = new HashMap<>();
-    private Map<String, DeviceStateResponse> mDevicesStateMap = new HashMap<>();
+    private List<DeviceStateResponse> mDevicesStateResponsesList;
+    private List<Device> mLoadedDevicesList;
+    private List<Device> mDevicesList = new LinkedList<>();
+    private List<DeviceStateResponse> mDevicesStateList = new LinkedList<>();
 
     public DevicesPresenter(List<DeviceStateResponse> deviceStateResponses,
                             String divisionId,
                             @NonNull DevicesRepository devicesRepository,
                             @NonNull DevicesContract.View divisionsView) {
         mDevicesStateResponsesList = deviceStateResponses;
-        mDevicesList = SmartHomeApplication
+        mLoadedDevicesList = SmartHomeApplication
                 .getInstance()
                 .getHomeConfiguration()
                 .getDevicesByDivisionID(divisionId);
@@ -83,7 +85,7 @@ public class DevicesPresenter implements DevicesContract.Presenter{
 
         indexDevicesAndStates();
         mDevicesView.setLoadingIndicator(false);
-        mDevicesView.showDevices(mDevicesMap, mDevicesStateMap);
+        mDevicesView.showDevices(mDevicesList, mDevicesStateList);
     }
 
     @Override
@@ -95,11 +97,11 @@ public class DevicesPresenter implements DevicesContract.Presenter{
 
         for(DeviceStateResponse state : mDevicesStateResponsesList){
             String id = state.getDeviceId();
-            mDevicesStateMap.put(id, state);
+            mDevicesStateList.add(state);
 
-            for(Device device : mDevicesList){
+            for(Device device : mLoadedDevicesList){
                 if (device.getId().equals(id)){
-                    mDevicesMap.put(id, device);
+                    mDevicesList.add(device);
                 }
             }
         }
