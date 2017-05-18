@@ -9,10 +9,17 @@ Android application to control Smart Home, that receives data from a Central HTT
 - **commonlib** - contains all common classes like XML parser entities and XML loader
 
 ### Libraries:
-- ButterKnife - https://github.com/JakeWharton/butterknife - to bind views easily 
-- Retrofit - https://github.com/square/retrofit - to call web requests
-- GSON - https://github.com/google/gson -  to convert Java Objects into their JSON representation and vice-versa
+- **ButterKnife** - https://github.com/JakeWharton/butterknife - to bind views easily 
+- **Retrofit** - https://github.com/square/retrofit - to call web requests
+- **GSON** - https://github.com/google/gson -  to convert Java Objects into their JSON representation and vice-versa
 
-### Wireframe:
+## Server
+- **URL:** http://\<IP address\>:9000/
+
+### Server API:
+- GET /devices
+- GET /divisions/{divisionID}/devices
+
+## Wireframe:
 
 ![app wireframe](wireframe/EN-Wireframe.png)
