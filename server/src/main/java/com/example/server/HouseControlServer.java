@@ -57,7 +57,7 @@ public class HouseControlServer {
 		DeviceStateResponse d2 = new DeviceStateResponse();
 		d2.setDeviceId("2");
 		List<PropertyValueResponse> pvr2 = new ArrayList<>();
-		pvr2.add(new PropertyValueResponse("1", "23"));
+		pvr2.add(new PropertyValueResponse("3", "23"));
 		d2.setValues(pvr2);
 
 		DeviceStateResponse d3 = new DeviceStateResponse();

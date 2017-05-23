@@ -59,13 +59,13 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 //        holder.deviceIcon.setImageResource(IconUtils.getIconsMap().get(device.getId()));
         holder.deviceName.setText(device.getName());
 
-//        holder.propertiesList.setAdapter(
-//                new DevicePropertiesAdapter(
-//                        mContext,
-//                        device.getRefDeviceType(),
-//                        deviceStateResponse.getValues()
-//                )
-//        );
+        holder.propertiesList.setAdapter(
+                new DevicePropertiesAdapter(
+                        mContext,
+                        device.getRefDeviceType(),
+                        deviceStateResponse.getValues()
+                )
+        );
 
         holder.saveValueButton.setOnClickListener(new View.OnClickListener() {
             @Override

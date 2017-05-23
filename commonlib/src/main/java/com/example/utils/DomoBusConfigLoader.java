@@ -326,9 +326,12 @@ public class DomoBusConfigLoader {
 
         for (Node node : enumValueTypeListXML) {
 
-            List<Node> enumeratedListXML = node.selectNodes(ENUM_VALUE_TYPE_LIST
-                    + "/" + ENUM_VALUE_TYPE
-                    + "/" + ENUMERATED
+//            List<Node> enumeratedListXML = node.selectNodes(ENUM_VALUE_TYPE_LIST
+//                    + "/" + ENUM_VALUE_TYPE
+//                    + "/" + ENUMERATED
+//            );
+            List<Node> enumeratedListXML = node.selectNodes(
+                    ENUMERATED
             );
 
             EnumValueType evt = new EnumValueType(
@@ -393,9 +396,8 @@ public class DomoBusConfigLoader {
 
         for (Node node : deviceTypeListXML) {
 
-            List<Node> propertyListXML = node.selectNodes(DEVICE_TYPE_LIST
-                    + "/" + DEVICE_TYPE
-                    + "/" + PROPERTY_LIST
+            List<Node> propertyListXML = node.selectNodes(
+                    PROPERTY_LIST
                     + "/" + PROPERTY
             );
 

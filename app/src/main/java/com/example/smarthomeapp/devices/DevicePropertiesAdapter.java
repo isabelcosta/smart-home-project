@@ -35,7 +35,6 @@ public class DevicePropertiesAdapter extends BaseAdapter {
         mDeviceTypeId = deviceTypeId;
         mConfigEntity = SmartHomeApplication.getInstance().getHomeConfiguration();
         mPropertyValueResponses = propertyValueResponses;
-
     }
 
     @Override
@@ -63,22 +62,19 @@ public class DevicePropertiesAdapter extends BaseAdapter {
                 propertyValueResponse.getPropertyId()
         );
 
-//        if (rowView == null) {
-//            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-//
-//            if (property.getValueType().equals(HouseConfigConstants.ENUM)) {
-//
-//                rowView = inflater.inflate(R.layout.property_enum, parent, false);
-//
-//            } else if (property.getValueType().equals(HouseConfigConstants.SCALAR)) {
-//
-//                rowView = inflater.inflate(R.layout.property_scalar, parent, false);
-//
-//            } else {
-//                // do nothing
-//            }
-//        }
+        if (rowView == null) {
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        return null;
+            switch (property.getValueType()){
+                case HouseConfigConstants.ENUM:
+                    rowView = inflater.inflate(R.layout.property_enum, parent, false);
+                    break;
+                case HouseConfigConstants.SCALAR:
+                    rowView = inflater.inflate(R.layout.property_scalar, parent, false);
+                    break;
+            }
+        }
+
+        return rowView;
     }
 }
