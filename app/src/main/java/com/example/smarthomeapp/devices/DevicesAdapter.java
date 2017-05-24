@@ -1,6 +1,7 @@
 package com.example.smarthomeapp.devices;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 //        holder.deviceIcon.setImageResource(IconUtils.getIconsMap().get(device.getId()));
         holder.deviceName.setText(device.getName());
 
+        holder.propertiesList.setLayoutManager(new LinearLayoutManager(mContext));
         holder.propertiesList.setAdapter(
                 new DevicePropertiesAdapter(
                         mContext,
@@ -98,7 +100,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         @BindView(R.id.device_name)
         TextView deviceName;
         @BindView(R.id.property_list)
-        ListView propertiesList;
+        RecyclerView propertiesList;
         @BindView(R.id.save_value_button)
         Button saveValueButton;
 

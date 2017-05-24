@@ -33,7 +33,7 @@
 
         </RelativeLayout>
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/property_list"
@@ -41,9 +41,9 @@
 
         <RelativeLayout
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="match_parent">
+            android:gravity="center">
             <Button
                 android:id="@+id/save_value_button"
                 android:layout_width="wrap_content"
