@@ -1,0 +1,33 @@
+[
+    {
+      "deviceId": "1",
+      "values": [
+        {
+          "propertyId": "1",
+          "propertyValue": "300"
+        },
+        {
+          "propertyId": "2",
+          "propertyValue": "ON"
+        }
+      ]
+    },
+    {
+      "deviceId": "2",
+      "values": [
+        {
+          "propertyId": "3",
+          "propertyValue": "23"
+        }
+      ]
+    },
+    {
+      "deviceId": "3",
+      "values": [
+        {
+          "propertyId": "1",
+          "propertyValue": "OFF"
+        }
+      ]
+    }
+  ]

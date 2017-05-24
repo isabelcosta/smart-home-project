@@ -1,6 +1,7 @@
 package com.example.server;
 
 
+import com.example.server.httpentities.InitialValuesLoader;
 import com.example.utils.DomoBusConfigLoader;
 import com.example.utils.domain.HomeConfigEntity;
 import com.example.server.httpentities.DeviceStateResponse;
@@ -28,12 +29,13 @@ public class HouseControlServer {
 	 */
 	private static ConcurrentHashMap<String, DeviceStateResponse> devicesValues = new ConcurrentHashMap<>();
 
-	public static DevicesResponse deviceValuesToDevicesResponse(){
+	public static List<DeviceStateResponse> deviceValuesToDevicesResponse(){
 		List<DeviceStateResponse> list = new ArrayList<>();
 		for (Map.Entry<String, DeviceStateResponse> entry : devicesValues.entrySet()) {
 			list.add(entry.getValue());
 		}
-		return new DevicesResponse(list);
+//		return new DevicesResponse(list);
+		return list;
 	}
 
 	public static ConcurrentHashMap<String, DeviceStateResponse> getDevicesValues(){
@@ -46,29 +48,8 @@ public class HouseControlServer {
 
 	public HouseControlServer(){
 
-		// initial values
-		DeviceStateResponse d = new DeviceStateResponse();
-		d.setDeviceId("1");
-		List<PropertyValueResponse> pvr = new ArrayList<>();
-		pvr.add(new PropertyValueResponse("1", "300"));
-		pvr.add(new PropertyValueResponse("2", "ON"));
-		d.setValues(pvr);
-
-		DeviceStateResponse d2 = new DeviceStateResponse();
-		d2.setDeviceId("2");
-		List<PropertyValueResponse> pvr2 = new ArrayList<>();
-		pvr2.add(new PropertyValueResponse("3", "23"));
-		d2.setValues(pvr2);
-
-		DeviceStateResponse d3 = new DeviceStateResponse();
-		d3.setDeviceId("3");
-		List<PropertyValueResponse> pvr3 = new ArrayList<>();
-		pvr3.add(new PropertyValueResponse("1", "OFF"));
-		d3.setValues(pvr3);
-
-		devicesValues.put("1", d);
-		devicesValues.put("2", d2);
-		devicesValues.put("3", d3);
+		// get initial values from json file
+		devicesValues = InitialValuesLoader.getDeviceInitialValues();
 	}
 
 	// Getters and Setters
