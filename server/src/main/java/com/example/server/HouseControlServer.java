@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class HouseControlServer {
 
-	private static int PORT = 9000;
+	public static int PORT = 9000;
 	private static String CONFIG_FILENAME = "basic_config_1.xml";
 	private static String INITIAL_VALUES_FILENAME = "initial_values.json";
 
@@ -28,7 +28,7 @@ public class HouseControlServer {
 	 */
 	private static ConcurrentHashMap<String, DeviceStateResponse> devicesValues = new ConcurrentHashMap<>();
 
-	private static List<DeviceStateResponse> deviceValuesToDevicesResponse(){
+	public static List<DeviceStateResponse> deviceValuesToDevicesResponse(){
 		List<DeviceStateResponse> list = new ArrayList<>();
 		for (Map.Entry<String, DeviceStateResponse> entry : devicesValues.entrySet()) {
 			list.add(entry.getValue());
@@ -36,11 +36,11 @@ public class HouseControlServer {
 		return list;
 	}
 
-	private static ConcurrentHashMap<String, DeviceStateResponse> getDevicesValues(){
+	public static ConcurrentHashMap<String, DeviceStateResponse> getDevicesValues(){
 		return devicesValues;
 	}
 
-	private static HomeConfigEntity getHomeConfigurationEntity(){
+	public static HomeConfigEntity getHomeConfigurationEntity(){
 		return homeConfiguration;
 	}
 
@@ -68,7 +68,6 @@ public class HouseControlServer {
 
 	public void startServer(int port) {
 		try {
-
 			server = HttpServer.create(new InetSocketAddress(port), 0);
 			System.out.println("Server started at " + port);
 
@@ -92,7 +91,6 @@ public class HouseControlServer {
 		server.stop(0);
 		System.out.println("server stopped");
 	}
-
 
 	// Main
 
