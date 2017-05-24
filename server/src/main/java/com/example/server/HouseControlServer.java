@@ -5,8 +5,6 @@ import com.example.server.httpentities.InitialValuesLoader;
 import com.example.utils.DomoBusConfigLoader;
 import com.example.utils.domain.HomeConfigEntity;
 import com.example.server.httpentities.DeviceStateResponse;
-import com.example.server.httpentities.DevicesResponse;
-import com.example.server.httpentities.PropertyValueResponse;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -18,8 +16,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class HouseControlServer {
 
-	public static int PORT = 9000;
-	public static String configFileName = "basic_config_1.xml";
+	private static int PORT = 9000;
+	private static String CONFIG_FILENAME = "basic_config_1.xml";
+	private static String INITIAL_VALUES_FILENAME = "initial_values.json";
 
 	private static HomeConfigEntity homeConfiguration;
 	private HttpServer server;
@@ -29,27 +28,26 @@ public class HouseControlServer {
 	 */
 	private static ConcurrentHashMap<String, DeviceStateResponse> devicesValues = new ConcurrentHashMap<>();
 
-	public static List<DeviceStateResponse> deviceValuesToDevicesResponse(){
+	private static List<DeviceStateResponse> deviceValuesToDevicesResponse(){
 		List<DeviceStateResponse> list = new ArrayList<>();
 		for (Map.Entry<String, DeviceStateResponse> entry : devicesValues.entrySet()) {
 			list.add(entry.getValue());
 		}
-//		return new DevicesResponse(list);
 		return list;
 	}
 
-	public static ConcurrentHashMap<String, DeviceStateResponse> getDevicesValues(){
+	private static ConcurrentHashMap<String, DeviceStateResponse> getDevicesValues(){
 		return devicesValues;
 	}
 
-	public static HomeConfigEntity getHomeConfigurationEntity(){
+	private static HomeConfigEntity getHomeConfigurationEntity(){
 		return homeConfiguration;
 	}
 
-	public HouseControlServer(){
+	private HouseControlServer(){
 
 		// get initial values from json file
-		devicesValues = InitialValuesLoader.getDeviceInitialValues();
+		devicesValues = InitialValuesLoader.getDeviceInitialValues(INITIAL_VALUES_FILENAME);
 	}
 
 	// Getters and Setters
@@ -105,7 +103,7 @@ public class HouseControlServer {
 
 		// parsing configuration file
 		System.out.println("=> Parsing configuration file ...");
-		DomoBusConfigLoader configLoader = new DomoBusConfigLoader(configFileName, true);
+		DomoBusConfigLoader configLoader = new DomoBusConfigLoader(CONFIG_FILENAME, true);
 		HomeConfigEntity homeConfig = configLoader.getHomeConfig();
 
 		if (homeConfig == null) {
