@@ -10,7 +10,7 @@ public class Constants {
 
     public static int XML_FILE_TO_LOAD = R.raw.basic_config_1;
 
-    interface DivisionType {
+    interface DivisionIconType {
         String BEDROOM = "1";
         String KITCHEN = "2";
         String BATHROOM = "3";
@@ -18,6 +18,13 @@ public class Constants {
         String ATTIC = "5";
         String LIVING_ROOM = "6";
         String GARDEN = "7";
+    }
+
+    interface DeviceIconType {
+        String ADJUSTABLE_LIGHT = "1";
+        String TEMPERATURE_SENSOR = "2";
+        String OVEN = "3";
+        String HUMIDITY_RATIO = "4";
     }
 
     public interface Login {

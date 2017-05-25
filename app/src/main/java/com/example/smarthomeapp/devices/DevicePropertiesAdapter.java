@@ -88,7 +88,7 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
             // Set list of options
             EnumValueType enumValueType = mConfigEntity.getEnumByID(mCurrentProperty.getRefValueType());
 //            enumHolder.enumSelectionList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-//            enumHolder.enumSelectionList.setAdapter(new SelectableOptionsListViewAdapter(enumValueType.getEnumerated()));
+            enumHolder.enumSelectionList.setAdapter(new SelectableOptionsListViewAdapter(enumValueType.getEnumerated()));
 
         } else if(mViewType == SCALAR) {
             ScalarPropertyViewHolder scalarHolder = (ScalarPropertyViewHolder) holder;
@@ -198,7 +198,7 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
 
         @Override
-        public Object getItem(int position) {
+        public Enumerated getItem(int position) {
             return _enumeratedOptions.get(position);
         }
 
@@ -215,6 +215,24 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
+            EnumeratedViewHolder holder;
+
+            if (convertView != null) {
+                holder = (EnumeratedViewHolder) convertView.getTag();
+
+            } else {
+                LayoutInflater inflater = LayoutInflater.from(mContext);
+
+                // get layout from enumerated_item.xml
+                convertView = inflater.inflate(R.layout.enumerated_item, parent, false);
+                holder = new EnumeratedViewHolder(convertView);
+                convertView.setTag(holder);
+            }
+
+            Enumerated enumerated = getItem(position);
+
+            holder.enumeratedText.setText(enumerated.getName());
+
             return convertView;
         }
 
@@ -225,7 +243,7 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         @Override
         public int getViewTypeCount() {
-            return 0;
+            return 1;
         }
 
         @Override
@@ -234,4 +252,12 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
+    public class EnumeratedViewHolder {
+        @BindView(R.id.enumerated_text_view)
+        TextView enumeratedText;
+
+        public EnumeratedViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
+    }
 }

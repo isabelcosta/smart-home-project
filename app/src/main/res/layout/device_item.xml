@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -15,11 +16,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
+
             <ImageView
                 android:id="@+id/device_icon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_bed"
+                android:layout_height="100dp"
+                tools:src="@drawable/ic_temperature"
                 android:layout_centerInParent="true"/>
 
             <TextView
@@ -29,8 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textSize="@dimen/device_text_size"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:textSize="@dimen/division_item_text_size"/>
 
         </RelativeLayout>
 

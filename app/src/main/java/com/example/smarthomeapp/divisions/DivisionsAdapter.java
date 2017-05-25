@@ -67,7 +67,7 @@ public class DivisionsAdapter extends BaseAdapter{
         Division division = mDivisionsList.get(position);
 
         holder.divisionText.setText(division.getName());
-        holder.divisionImage.setImageResource(IconUtils.getIconsMap().get(division.getRefDivisionType()));
+        holder.divisionImage.setImageResource(IconUtils.getDivisionsIconsMap().get(division.getRefDivisionType()));
 
         return convertView;
     }

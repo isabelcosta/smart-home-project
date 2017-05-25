@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.smarthomeapp.R;
 import com.example.smarthomeapp.httpentities.DeviceStateResponse;
+import com.example.smarthomeapp.util.IconUtils;
 import com.example.utils.domain.Device;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         DeviceStateResponse deviceStateResponse = mDevicesStateList.get(position);
         Device device = mDevicesList.get(position);
 
-//        holder.deviceIcon.setImageResource(IconUtils.getIconsMap().get(device.getId()));
+        holder.deviceIcon.setImageResource(IconUtils.getDevicesIconsMap().get(device.getRefDeviceType()));
         holder.deviceName.setText(device.getName());
 
         holder.propertiesList.setLayoutManager(new LinearLayoutManager(mContext));
