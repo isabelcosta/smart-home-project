@@ -40,7 +40,7 @@ public class DivisionsRemoteDataSource implements DivisionsDataSource{
     @Override
     public void getDevices(String divisionId, @NonNull final LoadDevicesCallback callback) {
         // Fetch a list of the division devices repositories.
-        Call<List<DeviceStateResponse>> devicesCall = _service.getDevices(divisionId);
+        Call<List<DeviceStateResponse>> devicesCall = _service.getDevicesByDivision(divisionId);
 
         // Execute the call asynchronously. Get a positive or negative callback.
         devicesCall.enqueue(new Callback<List<DeviceStateResponse>>() {

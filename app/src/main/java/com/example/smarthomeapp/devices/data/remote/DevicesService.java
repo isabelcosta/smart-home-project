@@ -16,7 +16,7 @@ import retrofit2.http.PUT;
 public interface DevicesService {
 
     @GET("devices")
-    Call<DevicesResponse> listDevices();
+    Call<List<DeviceStateResponse>> getAllDevices();
 
     @PUT("devices/{id}")
     Call<List<DeviceStateResponse>> saveDeviceValue();

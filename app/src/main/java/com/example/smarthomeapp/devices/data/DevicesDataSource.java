@@ -2,6 +2,7 @@ package com.example.smarthomeapp.devices.data;
 
 import android.support.annotation.NonNull;
 
+import com.example.smarthomeapp.httpentities.DeviceStateResponse;
 import com.example.utils.domain.Device;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface DevicesDataSource {
 
     interface LoadDevicesCallback {
 
-        void onDevicesLoaded(List<Device> devices);
+        void onDevicesLoaded(List<DeviceStateResponse> devices);
 
         void onDataNotAvailable();
     }
@@ -27,7 +28,7 @@ public interface DevicesDataSource {
         void onDataNotAvailable();
     }
 
-    void getDevicesValues(@NonNull LoadDevicesCallback callback);
+    void getAllDevices(@NonNull LoadDevicesCallback callback);
 
     void updateDeviceValue(@NonNull Map<String,String> devicesValues, @NonNull UpdateDeviceValueCallback callback);
 

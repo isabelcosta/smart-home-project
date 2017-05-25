@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class DevicesContract {
 
-    interface View extends BaseView<DevicesContract.Presenter> {
+    public interface View extends BaseView<DevicesContract.Presenter> {
 
         void setLoadingIndicator(boolean active);
 
@@ -30,7 +30,7 @@ public class DevicesContract {
         void showSuccessfulUpdate();
     }
 
-    interface Presenter extends BasePresenter {
+    public interface Presenter extends BasePresenter {
 
         void result(int requestCode, int resultCode);
 

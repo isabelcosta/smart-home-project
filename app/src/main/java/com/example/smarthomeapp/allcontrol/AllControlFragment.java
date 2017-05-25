@@ -1,9 +1,7 @@
-package com.example.smarthomeapp.devices;
-
+package com.example.smarthomeapp.allcontrol;
 
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +11,9 @@ import android.widget.Toast;
 
 import com.example.smarthomeapp.BaseFragment;
 import com.example.smarthomeapp.R;
+import com.example.smarthomeapp.devices.DevicesAdapter;
+import com.example.smarthomeapp.devices.DevicesContract;
+import com.example.smarthomeapp.devices.DevicesPresenter;
 import com.example.smarthomeapp.httpentities.DeviceStateResponse;
 import com.example.smarthomeapp.util.Injection;
 import com.example.utils.domain.Device;
@@ -24,19 +25,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
+
 /**
- * A simple {@link Fragment} subclass.
+ * Created by isabelcosta on 25-May-17.
  */
-public class DevicesFragment extends BaseFragment implements DevicesContract.View{
 
-    private DevicesContract.Presenter mPresenter;
+public class AllControlFragment extends BaseFragment implements AllControlContract.View{
 
+    private AllControlContract.Presenter mPresenter;
     private DevicesAdapter mAdapter;
-
-    private String mDivisionId;
-
-    public static String DEVICES_STATES_ARG = "DEVICES_STATES_ARG";
-    public static String DIVISION_ID_ARG = "DIVISION_ID_ARG";
+    private List<DeviceStateResponse> _devicesStateList;
 
     @BindView(R.id.devices_loader_view)
     View mLoader;
@@ -51,19 +50,19 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment DivisionsFragment.
+     * @return A new instance of fragment AllControlFragment.
      */
-    public static DevicesFragment newInstance(String divisionId, List<DeviceStateResponse> deviceStateResponses) {
-        DevicesFragment fragment = new DevicesFragment();
+    public static AllControlFragment newInstance() {
+        AllControlFragment fragment = new AllControlFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList(DEVICES_STATES_ARG, new ArrayList<Parcelable>(deviceStateResponses));
-        args.putString(DIVISION_ID_ARG, divisionId);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public DevicesFragment() {
-        // Required empty public constructor
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
     }
 
     @Override
@@ -71,17 +70,12 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
         super.onCreate(savedInstanceState);
 
         List<DeviceStateResponse> devicesStateList = new ArrayList<>();
-        if (getArguments() != null) {
-            devicesStateList = getArguments().getParcelableArrayList(DEVICES_STATES_ARG);
-            mDivisionId = getArguments().getString(DIVISION_ID_ARG);
-        }
 
         // Create the presenter
-        mPresenter = new DevicesPresenter(
+        mPresenter = new AllControlPresenter(
                 devicesStateList,
                 Injection.provideDevicesRepository(getContext()),
-                this,
-                mDivisionId
+                this
         );
 
         mAdapter = new DevicesAdapter(
@@ -93,14 +87,9 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.start();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        super.onCreateView(inflater, container, savedInstanceState);
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_devices, container, false);
@@ -109,12 +98,13 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
         mDevicesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // Set the adapter
         mDevicesRecyclerView.setAdapter(mAdapter);
+
         return view;
     }
 
     @Override
-    public void setPresenter(DevicesContract.Presenter presenter) {
-        mPresenter = presenter;
+    public void setPresenter(@NonNull AllControlContract.Presenter presenter) {
+        mPresenter = checkNotNull(presenter);
     }
 
     @Override
@@ -124,7 +114,7 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
     }
 
     @Override
-    public void showDevices(List<Device> devices, List<DeviceStateResponse> deviceStateResponses) {
+    public void showAllDevices(List<Device> devices, List<DeviceStateResponse> deviceStateResponses) {
         Toast.makeText(getContext(), "HALO  " + deviceStateResponses.size(), Toast.LENGTH_LONG).show();
         mAdapter.replaceData(devices, deviceStateResponses);
     }
@@ -136,16 +126,6 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
 
     @Override
     public boolean isActive() {
-        return isActive();
-    }
-
-    @Override
-    public void showFailedUpdate() {
-
-    }
-
-    @Override
-    public void showSuccessfulUpdate() {
-
+        return isAdded();
     }
 }

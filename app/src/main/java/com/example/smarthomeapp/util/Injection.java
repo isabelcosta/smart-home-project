@@ -21,4 +21,8 @@ public class Injection {
     public static DevicesRepository provideDevicesRepository(@NonNull Context context) {
         return DevicesRepository.getInstance(DevicesRemoteDataSource.getInstance());
     }
+
+//    public static AllControlRepository provideAllControlRepository(@NonNull Context context) {
+//        return AllControlRepository.getInstance(AllControlRemoteDataSource.getInstance());
+//    }
 }

@@ -30,9 +30,20 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                tools:text="Lamp"
                 android:layout_marginTop="30dp"
                 android:textSize="@dimen/division_item_text_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/device_division"
+                tools:text="Bedroom"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:gravity="center"
+                android:textSize="@dimen/device_text_size"
+                android:layout_below="@+id/device_name"/>
 
         </RelativeLayout>
 

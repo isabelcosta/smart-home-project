@@ -33,7 +33,7 @@ public class HomeConfigEntity {
      * Getters and Setters
      */
 
-    public List<Device> getDeviceList() {
+    public List<Device> getDevicesList() {
         return _deviceList;
     }
 

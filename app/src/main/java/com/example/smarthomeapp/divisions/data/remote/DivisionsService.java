@@ -15,5 +15,5 @@ import retrofit2.http.Path;
 public interface DivisionsService {
 
     @GET("divisions/{id}/devices")
-    Call<List<DeviceStateResponse>> getDevices(@Path("id") String id);
+    Call<List<DeviceStateResponse>> getDevicesByDivision(@Path("id") String id);
 }

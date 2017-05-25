@@ -118,12 +118,12 @@
                 <DeviceService RefService="4" />
             </DeviceServiceList>
         </Device>
-        <Device ID="2" RefDeviceType="2" Name="Kitchen Oven" Address="#0100" RefDivision="2" AccessLevel="3,5" UserBlocked="-,27">
+        <Device ID="2" RefDeviceType="2" Name="Temperature Sensor" Address="#0100" RefDivision="2" AccessLevel="3,5" UserBlocked="-,27">
             <DeviceServiceList>
                 <DeviceService RefService="4" />
             </DeviceServiceList>
         </Device>
-        <Device ID="3" RefDeviceType="4" Name="Temperature Sensor" Address="#0100" RefDivision="2" AccessLevel="3,5" UserBlocked="-,27">
+        <Device ID="3" RefDeviceType="4" Name="Kitchen Lamp" Address="#0100" RefDivision="2" AccessLevel="3,5" UserBlocked="-,27">
             <DeviceServiceList>
                 <DeviceService RefService="1" />
                 <DeviceService RefService="4" />

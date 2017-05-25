@@ -3,6 +3,7 @@ package com.example.smarthomeapp.devices;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 
+import com.example.smarthomeapp.allcontrol.AllControlContract;
 import com.example.smarthomeapp.app.SmartHomeApplication;
 import com.example.smarthomeapp.devices.data.DevicesDataSource;
 import com.example.smarthomeapp.devices.data.DevicesRepository;
@@ -35,16 +36,17 @@ public class DevicesPresenter implements DevicesContract.Presenter{
     private List<DeviceStateResponse> mDevicesStateList = new LinkedList<>();
 
     public DevicesPresenter(List<DeviceStateResponse> deviceStateResponses,
-                            String divisionId,
                             @NonNull DevicesRepository devicesRepository,
-                            @NonNull DevicesContract.View divisionsView) {
+                            @NonNull DevicesContract.View devicesView,
+                            String divisionId) {
+
         mDevicesStateResponsesList = deviceStateResponses;
         mLoadedDevicesList = SmartHomeApplication
                 .getInstance()
                 .getHomeConfiguration()
                 .getDevicesByDivisionID(divisionId);
         mDevicesRepository = devicesRepository;
-        mDevicesView = divisionsView;
+        mDevicesView = devicesView;
         mDevicesView.setPresenter(this);
     }
 
@@ -105,8 +107,6 @@ public class DevicesPresenter implements DevicesContract.Presenter{
                 }
             }
         }
-
-
     }
 
 }

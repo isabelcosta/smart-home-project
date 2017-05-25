@@ -3,11 +3,11 @@
       "deviceId": "1",
       "values": [
         {
-          "propertyId": "1",
+          "propertyId": "2",
           "propertyValue": "300"
         },
         {
-          "propertyId": "2",
+          "propertyId": "1",
           "propertyValue": "ON"
         }
       ]

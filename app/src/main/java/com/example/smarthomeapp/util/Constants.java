@@ -23,8 +23,8 @@ public class Constants {
     interface DeviceIconType {
         String ADJUSTABLE_LIGHT = "1";
         String TEMPERATURE_SENSOR = "2";
-        String OVEN = "3";
-        String HUMIDITY_RATIO = "4";
+        String OVEN = "4";
+        String HUMIDITY_RATIO = "5";
     }
 
     public interface Login {

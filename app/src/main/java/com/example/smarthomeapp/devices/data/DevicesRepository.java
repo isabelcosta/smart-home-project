@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.example.smarthomeapp.divisions.data.DivisionsDataSource;
 import com.example.smarthomeapp.divisions.data.DivisionsRepository;
+import com.example.smarthomeapp.httpentities.DeviceStateResponse;
 import com.example.utils.domain.Device;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
@@ -42,8 +44,20 @@ public class DevicesRepository implements DevicesDataSource{
     }
 
     @Override
-    public void getDevicesValues(@NonNull LoadDevicesCallback callback) {
+    public void getAllDevices(@NonNull final LoadDevicesCallback callback) {
+        checkNotNull(callback);
 
+        mDevicesRemoteDataSource.getAllDevices(new LoadDevicesCallback() {
+            @Override
+            public void onDevicesLoaded(List<DeviceStateResponse> deviceStateResponses) {
+                callback.onDevicesLoaded(deviceStateResponses);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
     }
 
     @Override

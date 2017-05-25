@@ -12,9 +12,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.smarthomeapp.R;
+import com.example.smarthomeapp.allcontrol.AllControlContract;
+import com.example.smarthomeapp.allcontrol.AllControlFragment;
+import com.example.smarthomeapp.app.SmartHomeApplication;
 import com.example.smarthomeapp.httpentities.DeviceStateResponse;
 import com.example.smarthomeapp.util.IconUtils;
 import com.example.utils.domain.Device;
+import com.example.utils.domain.Division;
 
 import java.util.List;
 
@@ -29,17 +33,31 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
     private List<Device> mDevicesList;
     private List<DeviceStateResponse> mDevicesStateList;
-    private DevicesContract.Presenter mPresenter;
+    private DevicesContract.Presenter mDevicesPresenter;
+    private AllControlContract.Presenter mAllControlPresenter;
     private Context mContext;
+    private boolean _isByDivisions;
 
     public DevicesAdapter(Context context,
                           DevicesContract.Presenter presenter,
                           List<Device> devicesMap,
                           List<DeviceStateResponse> devicesStateMap){
         this.mContext = context;
-        this.mPresenter = presenter;
+        this.mDevicesPresenter = presenter;
         this.mDevicesList = devicesMap;
         this.mDevicesStateList = devicesStateMap;
+        this._isByDivisions = true;
+    }
+
+    public DevicesAdapter(Context context,
+                          AllControlContract.Presenter presenter,
+                          List<Device> devicesMap,
+                          List<DeviceStateResponse> devicesStateMap){
+        this.mContext = context;
+        this.mAllControlPresenter = presenter;
+        this.mDevicesList = devicesMap;
+        this.mDevicesStateList = devicesStateMap;
+        this._isByDivisions = false;
     }
 
     @Override
@@ -61,6 +79,16 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         holder.deviceIcon.setImageResource(IconUtils.getDevicesIconsMap().get(device.getRefDeviceType()));
         holder.deviceName.setText(device.getName());
 
+        if(!_isByDivisions){
+            holder.deviceDivision.setVisibility(View.VISIBLE);
+            Division division = SmartHomeApplication
+                    .getInstance()
+                    .getHomeConfiguration()
+                    .getDivisionByID(device.getRefDivision());
+            holder.deviceDivision.setText(division.getName());
+        }
+        holder.deviceName.setText(device.getName());
+
         holder.propertiesList.setLayoutManager(new LinearLayoutManager(mContext));
         holder.propertiesList.setAdapter(
                 new DevicePropertiesAdapter(
@@ -73,7 +101,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         holder.saveValueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.saveDeviceValue(mPresenter.getDeviceValuesToSave());
+                mDevicesPresenter.saveDeviceValue(mDevicesPresenter.getDeviceValuesToSave());
             }
         });
     }
@@ -100,6 +128,8 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         ImageView deviceIcon;
         @BindView(R.id.device_name)
         TextView deviceName;
+        @BindView(R.id.device_division)
+        TextView deviceDivision;
         @BindView(R.id.property_list)
         RecyclerView propertiesList;
         @BindView(R.id.save_value_button)
