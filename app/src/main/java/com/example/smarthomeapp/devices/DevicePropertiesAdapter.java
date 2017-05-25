@@ -1,11 +1,14 @@
 package com.example.smarthomeapp.devices;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -14,8 +17,12 @@ import com.example.smarthomeapp.R;
 import com.example.smarthomeapp.app.SmartHomeApplication;
 import com.example.smarthomeapp.httpentities.PropertyValueResponse;
 import com.example.utils.HouseConfigConstants;
+import com.example.utils.domain.EnumValueType;
+import com.example.utils.domain.Enumerated;
 import com.example.utils.domain.HomeConfigEntity;
 import com.example.utils.domain.Property;
+import com.example.utils.domain.ScalarValueType;
+import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory;
 
 import java.util.List;
 
@@ -75,12 +82,24 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         if(mViewType == ENUM) {
             EnumPropertyViewHolder enumHolder = (EnumPropertyViewHolder) holder;
+
+            // Set title
             enumHolder.enumTitle.setText(mCurrentProperty.getName());
+            // Set list of options
+            EnumValueType enumValueType = mConfigEntity.getEnumByID(mCurrentProperty.getRefValueType());
+//            enumHolder.enumSelectionList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+//            enumHolder.enumSelectionList.setAdapter(new SelectableOptionsListViewAdapter(enumValueType.getEnumerated()));
 
         } else if(mViewType == SCALAR) {
             ScalarPropertyViewHolder scalarHolder = (ScalarPropertyViewHolder) holder;
-            scalarHolder.scalarTitle.setText(mCurrentProperty.getName());
 
+            // Set title
+            scalarHolder.scalarTitle.setText(mCurrentProperty.getName());
+            // Set seek bar
+            ScalarValueType scalarValueType = mConfigEntity.getScalarByID(mCurrentProperty.getRefValueType());
+            scalarHolder.scalarMin.setText(scalarValueType.getMinValue());
+            scalarHolder.scalarMax.setText(scalarValueType.getMaxValue());
+//            scalarHolder.scalarSeekBar.setMax(Integer.getInteger(scalarValueType.getMaxValue()));
         }
     }
 
@@ -132,12 +151,86 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
     public class ScalarPropertyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.scalar_title)
         TextView scalarTitle;
+        @BindView(R.id.scalar_max)
+        TextView scalarMax;
+        @BindView(R.id.scalar_min)
+        TextView scalarMin;
         @BindView(R.id.scalar_seek_bar)
         SeekBar scalarSeekBar;
 
         public ScalarPropertyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+        }
+    }
+
+    public class SelectableOptionsListViewAdapter implements ListAdapter {
+
+        private List<Enumerated> _enumeratedOptions;
+
+        public SelectableOptionsListViewAdapter(List<Enumerated> enumeratedOptions){
+            _enumeratedOptions = enumeratedOptions;
+        }
+
+        @Override
+        public boolean areAllItemsEnabled() {
+            return false;
+        }
+
+        @Override
+        public boolean isEnabled(int position) {
+            return false;
+        }
+
+        @Override
+        public void registerDataSetObserver(DataSetObserver observer) {
+
+        }
+
+        @Override
+        public void unregisterDataSetObserver(DataSetObserver observer) {
+
+        }
+
+        @Override
+        public int getCount() {
+            return _enumeratedOptions.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return _enumeratedOptions.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return false;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            return convertView;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return 0;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return _enumeratedOptions.isEmpty();
         }
     }
 

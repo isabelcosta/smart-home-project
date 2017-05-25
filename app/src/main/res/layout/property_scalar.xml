@@ -12,10 +12,33 @@
         android:layout_height="wrap_content"
         tools:text="TextView" />
 
-    <SeekBar
-        android:id="@+id/scalar_seek_bar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="20">
+
+        <TextView
+            android:id="@+id/scalar_min"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="TextView"
+            android:layout_weight="1"/>
+
+        <SeekBar
+            android:id="@+id/scalar_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="18"/>
+
+        <TextView
+            android:id="@+id/scalar_max"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="TextView" />
+
+    </LinearLayout>
 
 </LinearLayout>
