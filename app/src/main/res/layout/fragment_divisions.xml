@@ -25,12 +25,13 @@
             android:text="@string/loading_devices"/>
     </LinearLayout>
 
+    <include layout="@layout/empty_state"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/divisions_container_view">
 
-        <include layout="@layout/empty_state"/>
 
         <FrameLayout
             android:layout_width="match_parent"

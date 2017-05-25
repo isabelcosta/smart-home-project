@@ -4,27 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="gone"
         tools:visibility="visible"
+        android:gravity="center"
         android:id="@+id/empty_state_view">
 
         <ImageView
             android:id="@+id/empty_state_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_warning" />
+            android:src="@drawable/ic_warning_black_200dp" />
 
         <TextView
             android:id="@+id/empty_state_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_below="@+id/empty_state_icon"
-            tools:textSize="@dimen/no_division_text_size"
+            android:textSize="@dimen/no_division_text_size"
             tools:text="@string/no_devices_all" />
-    </RelativeLayout>
+    </LinearLayout>
 </merge>

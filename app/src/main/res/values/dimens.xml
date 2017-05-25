@@ -28,7 +28,7 @@
     <dimen name="division_item_text_size">24sp</dimen>
     <dimen name="division_grid_margin">20dp</dimen>
     <dimen name="no_division_icon_size">350dp</dimen>
-    <dimen name="no_division_text_size">32sp</dimen>
+    <dimen name="no_division_text_size">42sp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
     <!-- Device Fragment -->
