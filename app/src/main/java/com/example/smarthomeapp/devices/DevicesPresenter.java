@@ -87,7 +87,11 @@ public class DevicesPresenter implements DevicesContract.Presenter{
 
         indexDevicesAndStates();
         mDevicesView.setLoadingIndicator(false);
-        mDevicesView.showDevices(mDevicesList, mDevicesStateList);
+        if (mDevicesStateList.size() != 0) {
+            mDevicesView.showDevices(mDevicesList, mDevicesStateList);
+        } else {
+            mDevicesView.showNoDevices();
+        }
     }
 
     @Override

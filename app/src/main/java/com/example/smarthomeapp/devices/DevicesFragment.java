@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smarthomeapp.BaseFragment;
@@ -23,6 +25,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.view.View.GONE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +44,13 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
 
     @BindView(R.id.devices_loader_view)
     View mLoader;
+
+    @BindView(R.id.empty_state_view)
+    View mNoDevicesView;
+    @BindView(R.id.empty_state_icon)
+    ImageView mEmptyStateIcon;
+    @BindView(R.id.empty_state_text)
+    TextView mEmptyStateText;
 
     @BindView(R.id.devices_container_view)
     View mContainerView;
@@ -119,8 +130,8 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
 
     @Override
     public void setLoadingIndicator(boolean active) {
-        mLoader.setVisibility(active ? View.VISIBLE : View.GONE);
-        mContainerView.setVisibility(!active ? View.VISIBLE : View.GONE);
+        mLoader.setVisibility(active ? View.VISIBLE : GONE);
+        mContainerView.setVisibility(!active ? View.VISIBLE : GONE);
     }
 
     @Override
@@ -131,7 +142,9 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
 
     @Override
     public void showNoDevices() {
-
+        mContainerView.setVisibility(GONE);
+        mNoDevicesView.setVisibility(View.VISIBLE);
+        mEmptyStateText.setText(getString(R.string.no_devices_all));
     }
 
     @Override

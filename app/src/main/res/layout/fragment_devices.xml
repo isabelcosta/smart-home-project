@@ -10,6 +10,7 @@
         android:gravity="center"
         android:id="@+id/devices_loader_view"
         android:orientation="vertical">
+
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -23,6 +24,8 @@
             android:textSize="@dimen/no_division_text_size"
             android:text="@string/loading_devices"/>
     </LinearLayout>
+
+    <include layout="@layout/empty_state"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

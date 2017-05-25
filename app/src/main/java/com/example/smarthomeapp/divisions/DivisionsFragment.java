@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smarthomeapp.MainActivity;
@@ -53,8 +55,12 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
     @BindView(R.id.divisions_view)
     View mDivisionsView;
 
-    @BindView(R.id.no_divisions_view)
+    @BindView(R.id.empty_state_view)
     View mNoDivisionsView;
+    @BindView(R.id.empty_state_icon)
+    ImageView mEmptyStateIcon;
+    @BindView(R.id.empty_state_text)
+    TextView mEmptyStateText;
 
     @BindView(R.id.divisions_loader_view)
     View mLoader;
@@ -173,6 +179,7 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
     public void showNoDivisions() {
         mDivisionsView.setVisibility(View.GONE);
         mNoDivisionsView.setVisibility(View.VISIBLE);
+        mEmptyStateText.setText(getString(R.string.no_divisions_all));
     }
 
     @Override

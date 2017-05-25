@@ -33,12 +33,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="no_divisions_all">This house has no divisions!!!</string>
 
     <!-- Events Screen -->
     <string name="device_event">Device %1$s changed property %2$s to value %3$s.</string>
     <string name="user_event">User %1$s changed property %2$s from device %3$s to value %4$s.</string>
 
+    <!-- Divisions Screen -->
+    <string name="no_divisions_all">This house has no divisions!!!</string>
+
+    <!-- Devices Screen -->
+    <string name="no_devices_all">This division has no devices!!!</string>
 
 
     <!-- Settings Screen -->

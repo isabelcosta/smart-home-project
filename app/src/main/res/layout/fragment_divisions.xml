@@ -30,27 +30,7 @@
         android:layout_height="match_parent"
         android:id="@+id/divisions_container_view">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/no_divisions_view">
-
-            <ImageView
-                android:id="@+id/no_divisions_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_warning" />
-
-            <TextView
-                android:id="@+id/no_divisions_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/no_divisions_icon"
-                android:textSize="@dimen/no_division_text_size"
-                android:text="@string/no_divisions_all" />
-        </RelativeLayout>
+        <include layout="@layout/empty_state"/>
 
         <FrameLayout
             android:layout_width="match_parent"
