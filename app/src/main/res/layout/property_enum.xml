@@ -12,10 +12,11 @@
         android:layout_height="wrap_content"
         tools:text="TextView"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/enum_selection_view"
+        android:choiceMode="singleChoice"
         android:layout_marginTop="10dp"/>
 
 </LinearLayout>

@@ -2,14 +2,17 @@ package com.example.smarthomeapp.devices;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -87,7 +90,7 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
             enumHolder.enumTitle.setText(mCurrentProperty.getName());
             // Set list of options
             EnumValueType enumValueType = mConfigEntity.getEnumByID(mCurrentProperty.getRefValueType());
-//            enumHolder.enumSelectionList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+            enumHolder.enumSelectionList.setLayoutManager(new LinearLayoutManager(mContext));
             enumHolder.enumSelectionList.setAdapter(new SelectableOptionsListViewAdapter(enumValueType.getEnumerated()));
 
         } else if(mViewType == SCALAR) {
@@ -140,7 +143,7 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
         @BindView(R.id.enum_title)
         TextView enumTitle;
         @BindView(R.id.enum_selection_view)
-        ListView enumSelectionList;
+        RecyclerView enumSelectionList;
 
         public EnumPropertyViewHolder(View view) {
             super(view);
@@ -164,76 +167,28 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    public class SelectableOptionsListViewAdapter implements ListAdapter {
+    /**
+     * Enumerated Options Adapter
+     */
+    public class SelectableOptionsListViewAdapter extends RecyclerView.Adapter<EnumeratedViewHolder> {
 
-        private List<Enumerated> _enumeratedOptions;
+        private List<Enumerated> _enumeratedOptionsList;
 
         public SelectableOptionsListViewAdapter(List<Enumerated> enumeratedOptions){
-            _enumeratedOptions = enumeratedOptions;
+            _enumeratedOptionsList = enumeratedOptions;
         }
 
         @Override
-        public boolean areAllItemsEnabled() {
-            return false;
+        public EnumeratedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.enumerated_item, parent, false);
+            EnumeratedViewHolder vh = new EnumeratedViewHolder(view);
+            return vh;
         }
 
         @Override
-        public boolean isEnabled(int position) {
-            return false;
-        }
-
-        @Override
-        public void registerDataSetObserver(DataSetObserver observer) {
-
-        }
-
-        @Override
-        public void unregisterDataSetObserver(DataSetObserver observer) {
-
-        }
-
-        @Override
-        public int getCount() {
-            return _enumeratedOptions.size();
-        }
-
-        @Override
-        public Enumerated getItem(int position) {
-            return _enumeratedOptions.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return false;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            EnumeratedViewHolder holder;
-
-            if (convertView != null) {
-                holder = (EnumeratedViewHolder) convertView.getTag();
-
-            } else {
-                LayoutInflater inflater = LayoutInflater.from(mContext);
-
-                // get layout from enumerated_item.xml
-                convertView = inflater.inflate(R.layout.enumerated_item, parent, false);
-                holder = new EnumeratedViewHolder(convertView);
-                convertView.setTag(holder);
-            }
-
-            Enumerated enumerated = getItem(position);
-
+        public void onBindViewHolder(EnumeratedViewHolder holder, int position) {
+            Enumerated enumerated = _enumeratedOptionsList.get(position);
             holder.enumeratedText.setText(enumerated.getName());
-
-            return convertView;
         }
 
         @Override
@@ -242,21 +197,17 @@ public class DevicePropertiesAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
 
         @Override
-        public int getViewTypeCount() {
-            return 1;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return _enumeratedOptions.isEmpty();
+        public int getItemCount() {
+            return _enumeratedOptionsList.size();
         }
     }
 
-    public class EnumeratedViewHolder {
-        @BindView(R.id.enumerated_text_view)
-        TextView enumeratedText;
+    public class EnumeratedViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.enumerated_rounded_checkbox)
+        RadioButton enumeratedText;
 
         public EnumeratedViewHolder(View view) {
+            super(view);
             ButterKnife.bind(this, view);
         }
     }
