@@ -21,6 +21,15 @@ Developed for Ambient Intelligence course.
 - Used [Material Design](https://material.io/) icons
 - Used vector images for divisions and devices from [Pixabay](https://pixabay.com/) and [Canva](https://www.canva.com/) for logo
 
+### Features
+- Login after loading XML file configuration (by clicking a button)
+- Login with remember me option
+- Logout from application
+- See all divisions
+- See devices by division
+- See all devices
+- ...
+
 ## Server
 - **URL:** http://\<IP address\>:9000/
 - Implemented in Java
