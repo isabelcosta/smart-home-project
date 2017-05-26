@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RemoteUtils {
 
     // Change IP Address
-    private static String SERVER_IP_ADDRESS = "192.168.1.33";
+    private static String SERVER_IP_ADDRESS = "194.210.231.153";
     private static String SERVER_PORT = "9000";
 
     private static String API_BASE_URL = "http://" + SERVER_IP_ADDRESS + ":" + SERVER_PORT + "/";

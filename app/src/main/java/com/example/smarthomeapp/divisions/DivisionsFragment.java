@@ -118,7 +118,7 @@ public class DivisionsFragment extends BaseFragment implements DivisionsContract
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 mDivisionsPresenter.openDevicesList(position);
-                Toast.makeText(getContext(), "Room", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "Room", Toast.LENGTH_LONG).show();
 
             }
         });

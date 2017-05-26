@@ -115,7 +115,7 @@ public class AllControlFragment extends BaseFragment implements AllControlContra
 
     @Override
     public void showAllDevices(List<Device> devices, List<DeviceStateResponse> deviceStateResponses) {
-        Toast.makeText(getContext(), "HALO  " + deviceStateResponses.size(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(), "HALO  " + deviceStateResponses.size(), Toast.LENGTH_LONG).show();
         mAdapter.replaceData(devices, deviceStateResponses);
     }
 

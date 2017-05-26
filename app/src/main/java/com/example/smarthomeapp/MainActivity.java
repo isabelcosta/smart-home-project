@@ -64,11 +64,9 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
 //                replaceFragment(DivisionsFragment.newInstance(), R.string.menu_overview);
             }
         });
-
         divisionsMenuOptionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Hey How", Toast.LENGTH_LONG).show();
                 replaceFragment(DivisionsFragment.newInstance(), R.string.menu_divisions);
             }
         });
@@ -84,7 +82,6 @@ public class MainActivity extends BaseActivity implements BaseFragment.OnFragmen
                 replaceFragment(AllControlFragment.newInstance(), R.string.menu_control);
             }
         });
-
         settingsMenuOptionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

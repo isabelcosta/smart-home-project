@@ -136,7 +136,7 @@ public class DevicesFragment extends BaseFragment implements DevicesContract.Vie
 
     @Override
     public void showDevices(List<Device> devices, List<DeviceStateResponse> deviceStateResponses) {
-        Toast.makeText(getContext(), "HALO  " + deviceStateResponses.size(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(), "HALO  " + deviceStateResponses.size(), Toast.LENGTH_LONG).show();
         mAdapter.replaceData(devices, deviceStateResponses);
     }
 
